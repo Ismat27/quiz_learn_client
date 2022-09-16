@@ -1,15 +1,11 @@
-import { Navigate, Route } from "react-router-dom";
-import DashboardHome from "./pages/DashboardHome";
-import DashboardSettings from "./pages/DashBoardSettings";
+import { Outlet } from "react-router-dom"
 
-const Dashboard = ({login=true}) => {
-    if (!login) {
-        return <Navigate to={'/'} />
-    }
+const Dashboard = () => {
+    
     return (
         <>
-           <Route index element={<DashboardHome/>}/> 
-           <Route path="settings" element={<DashboardSettings/>}/> 
+           This is the Dashboard layout
+           <Outlet/>
         </>   
     )
 }
