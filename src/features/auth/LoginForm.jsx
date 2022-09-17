@@ -1,9 +1,12 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { useNavigate } from "react-router-dom"
+import { Context } from "../../app/AppContext"
 
 const LoginForm = () => {
     const [username, setUsername ]= useState('')
     const [password, setPassword] = useState('')
-
+    const {setLogin, setToken} = useContext(Context)
+    const nav = useNavigate()
     const formSubmit = (event) => {
         event.preventDefault()
         const requestOptions = {
@@ -15,9 +18,13 @@ const LoginForm = () => {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    console.log(data)
+                    const token = data.token
+                    localStorage.setItem('token', token)
                     setPassword('')
                     setUsername('')
+                    setLogin(true)
+                    setToken(token)
+                    nav('/dashboard')
                 }
                 else {
                     console.log('error');

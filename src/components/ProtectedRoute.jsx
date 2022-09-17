@@ -1,22 +1,33 @@
-import { useState } from "react"
-import { Navigate, Outlet } from "react-router-dom"
+import { useContext, useState } from "react"
+import { Link, Navigate, Outlet } from "react-router-dom"
+import { Context } from "../app/AppContext"
 
 const ProtectedRoute = () => {
-    const [token, setToken] = useState('')
-
-    const tempToken = localStorage.getItem('token')
-
-    if (tempToken) {
-        setToken(tempToken)
-    }
-
-    if (!token) {
+    const [count, setCount] = useState(0)
+    const {login, setLogin, setToken} = useContext(Context)
+    if (!login) {
         return <Navigate to={'/'} replace />
     }
-
+    const logout = () => {
+        localStorage.setItem('token', '')
+        setLogin(false)
+        setToken('')
+    }
     return (
-        <Outlet/>
+        <>
+            <nav>
+                <Link onClick={logout} to={'/'}>log out</Link>
+            </nav>
+            <Outlet/>
+            <div>
+                <button onClick={() => setCount(prev => prev - 1)}>-</button>
+                <span>{count}</span>
+                <button onClick={() => setCount(prev => prev + 1)}>+</button>
+            </div>
+        </>
+        
     )
 }
+
 
 export default ProtectedRoute
