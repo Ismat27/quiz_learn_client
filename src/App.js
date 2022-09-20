@@ -13,6 +13,7 @@ import LeaderBoard from './features/dashboard/pages/LeaderBoard';
 import Payment from './features/dashboard/pages/Payment';
 import Skill from './features/dashboard/pages/Skill';
 import Profile from './features/dashboard/pages/Profile';
+import NewQuestion from './features/admin/pages/NewQuestion';
 import './App.css';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Route path='earning' element={<EarningHistory/>}/>
         </Route>
       </Route>
+      <Route path='set-question' element={<NewQuestion/>}/>
     </Routes>
    </BrowserRouter>
   );
