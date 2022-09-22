@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import InputOption from '../components/InputOption'
 import PointOption from '../components/PointOption'
+import '../styles/Question.css'
+
 const NewQuestion = () => {
-    
-    const [data, setData] = useState({
+
+    const initialData = {
         text: "",
         option_a: "",
         option_b: "",
@@ -11,10 +13,12 @@ const NewQuestion = () => {
         option_d: "",
         answer: "",
         cp_wrong: 0,
-        cp_right: 0,
-        cap_wrong: 0,
-        cap_right: 0,
-    })
+        cp_right: 20,
+        cap_wrong: 7,
+        cap_right: 15,
+    }
+    
+    const [data, setData] = useState(initialData)
 
     const getFormData = (event) => {
         const {name, value} = event.target
@@ -32,14 +36,16 @@ const NewQuestion = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         };
-        fetch('http://127.0.0.1:8000/question/', requestOptions)
+        fetch('http://127.0.0.1:8000/questions/', requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
+                    setData(initialData)
                     console.log('success');
                 }
                 else {
                     console.log('failed');
+                    console.log(data);
                 }
             })
             .catch(error => {
@@ -48,11 +54,11 @@ const NewQuestion = () => {
     }
 
   return (
-    <div>
+    <div className='formQuestion-container'>
         <form onSubmit={formSubmit}>
             <div className='form-field'>
                 <label className='' htmlFor='text'>Question:</label>
-                <textarea name='text' id='text' value={data.text} onChange={getFormData}/>
+                <textarea rows={15} name='text' id='text' value={data.text} onChange={getFormData}/>
             </div>
             <InputOption name={'answer'} value={data.answer} change={getFormData}/>
             <div className='options'>

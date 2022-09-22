@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+}
+.formQuestion-container {
+    width: 90%;
+    margin: auto;
+}
+.form-field {
+    margin-bottom: 1rem;
+}
+.form-field label {
+    text-transform: capitalize;
+    font-size: 1rem;
+    font-weight: 500;
+}
+.form-field input, .form-field textarea {
+    display: block;
+    width: 100%;
+    margin-top: .2rem;
+}
+.points {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+}
+@media (min-width: 576px) {
+    
+}
+@media (min-width: 768px) {
+    
+}
+@media (min-width: 992px) {
+    .formQuestion-container {
+        width: 768px;
+    }
+}
+@media (min-width: 1200px) {
+    
+}
