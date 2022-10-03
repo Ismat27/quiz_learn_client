@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { Context } from '../../../app/AppContext'
 import InputOption from '../components/InputOption'
 import PointOption from '../components/PointOption'
 import '../styles/Question.css'
 
 const NewQuestion = () => {
 
+    const { token } = useContext(Context)
     const initialData = {
         text: "",
         option_a: "",
@@ -33,7 +35,7 @@ const NewQuestion = () => {
         event.preventDefault()
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${token}`  },
             body: JSON.stringify(data)
         };
         fetch('http://127.0.0.1:8000/questions/', requestOptions)

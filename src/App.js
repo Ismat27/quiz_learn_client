@@ -7,7 +7,7 @@ import Dashboard from './features/dashboard/DashBoard';
 import DashboardHome from './features/dashboard/pages/DashboardHome';
 import ReferralHistory from './features/dashboard/pages/ReferralHistory';
 import Spin from './features/dashboard/pages/Spin';
-import Quiz from './features/dashboard/pages/Quiz';
+import QuizPage from './features/dashboard/pages/QuizPage';
 import EarningHistory from './features/dashboard/pages/EarningHistory';
 import LeaderBoard from './features/dashboard/pages/LeaderBoard';
 import Payment from './features/dashboard/pages/Payment';
@@ -28,7 +28,7 @@ function App() {
         <Route path='dashboard' element={<Dashboard/>}>
           <Route index element={<DashboardHome/>}/>
           <Route path='skill' element={<Skill/>}/>
-          <Route path='quiz' element={<Quiz/>}/>
+          <Route path='quiz' element={<QuizPage/>}/>
           <Route path='spin' element={<Spin/>}/>
           <Route path='profile' element={<Profile/>}/>
           <Route path='payment' element={<Payment/>}/>
@@ -36,8 +36,8 @@ function App() {
           <Route path='referral' element={<ReferralHistory/>}/>
           <Route path='earning' element={<EarningHistory/>}/>
         </Route>
+        <Route path='set-question' element={<NewQuestion/>}/>
       </Route>
-      <Route path='set-question' element={<NewQuestion/>}/>
     </Routes>
    </BrowserRouter>
   );
