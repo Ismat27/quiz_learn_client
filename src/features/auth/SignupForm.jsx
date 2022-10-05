@@ -16,16 +16,17 @@ const SignupForm = () => {
             body: JSON.stringify({ username, first_name:firstName, last_name:lastName, password, email })
         };
         fetch('http://127.0.0.1:8000/signup/', requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    console.log(data)
-                    setPassword('')
-                    setUsername('')
+            .then(response => {
+                if (response.status >=200 && response.status<=299) {
+                    return response.json()
                 }
                 else {
-                    console.log('error');
+                    throw Error(response.statusText);
                 }
+            })
+            .then(data => {
+                setPassword('')
+                setUsername('')
             })
             .catch(error => {
                 console.log(error);

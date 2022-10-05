@@ -20,6 +20,7 @@ const QuizPage = () => {
   const [questions, setQuestions] = useState(tempQuestions)
   const [number, setNumber] = useState(0)
   const [userAnswers, setUserAnswers] = useState(answers)
+  const [quiz_id, setQuiz_id] = useState('')
 
   const getNextQuestion = () => {
     setNumber(prev => {
@@ -37,7 +38,7 @@ const QuizPage = () => {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${token}` },
-      body: JSON.stringify({ answers: userAnswers})
+      body: JSON.stringify({ answers: userAnswers, quiz_id })
     }
     fetch('http://127.0.0.1:8000/mark-quiz/', requestOptions)
         .then(response => {
@@ -84,14 +85,16 @@ const QuizPage = () => {
         })
         .then(data => {
           if (data) {
-            const tempAnswers = data.map((question_data) => {
+            const {questions, quiz_id} = data
+            const tempAnswers = questions.map((question_data) => {
               return {
                 question_id: question_data.id,
                 user_answer: ''
               }
             })
             setUserAnswers(tempAnswers)
-            setQuestions(data)
+            setQuestions(questions)
+            setQuiz_id(quiz_id)
           }
           else {
             setQuestions(prev => prev)
@@ -101,7 +104,7 @@ const QuizPage = () => {
         .catch(error => {
           console.log(error);
     });
-  }, [])
+  }, [token])
 
   return (
     <div>
