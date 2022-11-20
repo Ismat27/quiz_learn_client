@@ -1,5 +1,6 @@
 import { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
+import axios from "axios"
 import { Context } from "../../app/AppContext"
 
 const LoginForm = () => {
@@ -9,30 +10,22 @@ const LoginForm = () => {
     const nav = useNavigate()
     const formSubmit = (event) => {
         event.preventDefault()
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
-        };
-        fetch('http://127.0.0.1:8000/login/', requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    const token = data.token
-                    localStorage.setItem('token', token)
-                    setPassword('')
-                    setUsername('')
-                    setLogin(true)
-                    setToken(token)
-                    nav('/dashboard')
-                }
-                else {
-                    console.log('error');
-                }
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        axios.post('http://127.0.0.1:8000/login/', {
+            username, password
+        })
+        .then(response => {
+            const data = response.data
+            const {token} = data
+            localStorage.setItem('token', token)
+            setToken(token)
+            setPassword('')
+            setUsername('')
+            setLogin(true)
+            nav('/dashboard')
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     return (

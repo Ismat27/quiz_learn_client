@@ -1,4 +1,5 @@
 import { useState } from "react"
+import axios from "axios"
 
 const SignupForm = () => {
     const [username, setUsername] = useState('')
@@ -10,27 +11,19 @@ const SignupForm = () => {
 
     const formSubmit = (event) => {
         event.preventDefault()
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, first_name:firstName, last_name:lastName, password, email })
-        };
-        fetch('http://127.0.0.1:8000/signup/', requestOptions)
-            .then(response => {
-                if (response.status >=200 && response.status<=299) {
-                    return response.json()
-                }
-                else {
-                    throw Error(response.statusText);
-                }
-            })
-            .then(data => {
-                setPassword('')
-                setUsername('')
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        axios.post('http://127.0.0.1:8000/signup/', {
+            username, 
+            first_name:firstName, 
+            last_name:lastName, 
+            password, 
+            email
+        })
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     return (
