@@ -1,28 +1,35 @@
 import { useEffect, useContext, useState } from "react"
+import axios from "axios"
 import { Context } from "../../../app/AppContext"
 
 const DashboardHome = () => {
     const [referrals, setReferrals] = useState([])
-    const {token} =  useContext(Context)
+    const {token, setLogin} =  useContext(Context)
     
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/dashboard/', {
-        method: 'GET',
-        headers: {
-            'Authorization': `Token ${token}`,
-            'Content-Type': 'application/json'
-        }
+        axios.get('http://127.0.0.1:8000/dashboard/', {
+            headers: {
+                'Authorization': `Token ${token}`,
+                'Content-Type': 'application/json'
+            }
         })
-        .then(response => response.json())
-        .then(data => {
-            setReferrals(data.referrals)
-            console.log(data);
-            
+        .then(response => {
+            const {data} = response
+            const { referrals } = data
+            setReferrals(referrals)
+            setLogin(true)
         })
         .catch(error => {
             console.log(error);
+            setLogin(false)
         })
-        }, [token])
+    
+        }, [token, setLogin, setReferrals])
+
+
+    if (referrals.length <=0) {
+        return <h1>no items</h1>
+    }
 
     return (
         <>

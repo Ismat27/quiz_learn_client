@@ -1,8 +1,19 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useContext } from "react";
+import jwt_decode from 'jwt-decode'
 export const Context = createContext() 
 
 const AppContext = ({stored_token, children}) => {
-    const [login , setLogin] = useState(stored_token?true:false)
+
+    let tokenExpired = true
+
+    if (stored_token) {
+        const decoded = jwt_decode(stored_token)
+        const exp = decoded.exp
+        const expDate = new Date(exp * 1000)
+        tokenExpired = expDate.getTime() < new Date().getTime()
+    }
+    
+    const [login , setLogin] = useState(tokenExpired?false:true)
     const [token, setToken] = useState(stored_token)
     const contextValue = {
         login,
@@ -17,5 +28,11 @@ const AppContext = ({stored_token, children}) => {
     )
     
 }
+
+const useGlobalContext = () => {
+    return useContext(Context)
+}
+
+export { useGlobalContext }
 
 export default AppContext
