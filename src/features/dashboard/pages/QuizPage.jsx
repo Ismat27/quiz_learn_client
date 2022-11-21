@@ -17,11 +17,13 @@ const answers = [
 ]
 
 const QuizPage = () => {
+
   const {token} = useContext(Context)
   const [questions, setQuestions] = useState(tempQuestions)
   const [number, setNumber] = useState(0)
   const [userAnswers, setUserAnswers] = useState(answers)
   const [quiz_id, setQuiz_id] = useState('')
+  const [error, setError] = useState(false)
 
   const getNextQuestion = () => {
     setNumber(prev => {
@@ -45,6 +47,7 @@ const QuizPage = () => {
       setUserAnswers([])
       setNumber(0)
       setQuiz_id('')
+      setError(false)
       console.log(data);
     })
     .catch(error => {
@@ -82,9 +85,27 @@ const QuizPage = () => {
     })
     .catch(error => {
       console.log(error);
+      setError(true)
     })
 
   }, [token])
+
+
+  if (error) {
+    return (
+      <div>
+        <h1>No Quiz</h1>
+        <p>Unable to start quiz. It may be that you have taken quiz, or network isuue.</p>
+        <p>Contact the admin for enquiries</p>
+      </div>
+    )
+  }
+
+  if (questions.length <=0) {
+    return (
+      <h1>Loading quiz</h1>
+    )
+  }
 
   return (
     <div>
