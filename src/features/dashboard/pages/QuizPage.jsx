@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useEffect, useState, useContext } from 'react'
 import { Context } from '../../../app/AppContext'
 import QuizPanel from '../components/QuizPanel'
@@ -35,26 +36,20 @@ const QuizPage = () => {
 
   const submitQuiz = (event) => {
     event.preventDefault()
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${token}` },
-      body: JSON.stringify({ answers: userAnswers, quiz_id })
-    }
-    fetch('http://127.0.0.1:8000/mark-quiz/', requestOptions)
-        .then(response => {
-          if (response.status >= 200 && response.status <=200) {
-            return response.json()
-          }
-          else {
-            throw Error(response.statusText)
-          }
-        })
-        .then(data => {
-          console.log(data);
-        })
-        .catch(error => {
-          console.log(error);
-    });
+    axios.post('http://127.0.0.1:8000/mark-quiz/', { answers: userAnswers, quiz_id }, {
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${token}` }
+    } )
+    .then(response => {
+      const {data} = response
+      setQuestions([])
+      setUserAnswers([])
+      setNumber(0)
+      setQuiz_id('')
+      console.log(data);
+    })
+    .catch(error => {
+      console.log(error);
+    })
   }
 
   const ActionButtons = () => {
@@ -70,40 +65,25 @@ const QuizPage = () => {
   }
 
   useEffect(() => {
-    const requestOptions = {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${token}` },
-    }
-    fetch('http://127.0.0.1:8000/quiz-question/', requestOptions)
-        .then(response => {
-          if (response.status >= 200 && response.status <= 299) {
-            return response.json()
-          }
-          else {
-            throw Error(response.statusText);
-          }
-        })
-        .then(data => {
-          if (data) {
-            const {questions, quiz_id} = data
-            const tempAnswers = questions.map((question_data) => {
-              return {
-                question_id: question_data.id,
-                user_answer: ''
-              }
-            })
-            setUserAnswers(tempAnswers)
-            setQuestions(questions)
-            setQuiz_id(quiz_id)
-          }
-          else {
-            setQuestions(prev => prev)
-              console.log('error');
-          }
-        })
-        .catch(error => {
-          console.log(error);
-    });
+    axios.get('http://127.0.0.1:8000/quiz-question/', {
+      headers: { Authorization : `Token ${token}` }
+    })
+    .then(response => {
+      const { quiz_id, questions } = response.data
+      const tempAnswers = questions.map((question_data) => {
+        return {
+          question_id: question_data.id,
+          user_answer: ''
+        }
+      })
+      setUserAnswers(tempAnswers)
+      setQuestions(questions)
+      setQuiz_id(quiz_id)
+    })
+    .catch(error => {
+      console.log(error);
+    })
+
   }, [token])
 
   return (
