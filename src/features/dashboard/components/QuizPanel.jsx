@@ -2,14 +2,14 @@ import React from 'react'
 
 const QuizPanel = ({data, userAnswers, setUserAnswers}) => {
 
-    const currentAnswer = userAnswers.filter(item => item.question_id == data.id)[0]
+    const currentAnswer = userAnswers.filter(item => item.question_id === data.id)[0]
     let chosen = currentAnswer?currentAnswer.user_answer: ''
     const { options } = data
     
     const selectAnswer = (event) => {
         setUserAnswers(prev => {
             const answers = prev.map(answer => {
-                if (answer.question_id == data.id) {
+                if (answer.question_id === data.id) {
                     return {
                         ...answer,
                         user_answer: event.target.value

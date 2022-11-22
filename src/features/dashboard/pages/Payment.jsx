@@ -7,7 +7,6 @@ const Payment = () => {
 
   const { token } = useContext(Context)
   const [email, setEmail] = useState("")
-  const [publicKey, setPublicKey] = useState("")
 
   const config = {
     reference: "",
@@ -49,23 +48,6 @@ const Payment = () => {
   
   const initializePayment = usePaystackPayment(config)
 
-  const pay = () => {
-    const data = {
-      email: email
-    }
-    axios.post('http://127.0.0.1:8000/initiate-payment/', data, {
-      headers: {Authorization: `Token ${token}`}
-    })
-    .then(response => {
-      console.log(response.data, publicKey);
-      setPublicKey(response.data)
-      initializePayment(paymentSuccess, paymentStop)
-    })
-    .catch(error => {
-      console.log(error);
-    })
-  }
-
   return (
     <div>
       <div>
@@ -73,7 +55,6 @@ const Payment = () => {
           disabled={!Boolean(email)}
           onClick={() => {
             initializePayment(paymentSuccess, paymentStop)
-            // pay()
           }}  
         >
           Pay N 50
