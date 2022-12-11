@@ -1,5 +1,9 @@
 import { useState } from "react"
 import axios from "axios"
+import logo from '../../images/logo.png'
+import styled from "styled-components"
+import { Link } from "react-router-dom"
+import Footer from "../../components/Footer"
 
 const SignupForm = () => {
     const [username, setUsername] = useState('')
@@ -27,7 +31,13 @@ const SignupForm = () => {
     }
 
     return (
-        <main>
+        <>
+
+        <Wrapper className="auth-page">
+            <article>
+                <img src={logo} alt='giftedbrain' className="logo" />
+                <h2>sign up</h2>
+            </article>
             <form onSubmit={formSubmit}>
                 <div className="formField username">
                     <label htmlFor="username">Username</label>
@@ -39,7 +49,7 @@ const SignupForm = () => {
                         onChange={event => setUsername(event.target.value)}
                     />
                 </div>
-                <div className="fullname">
+                {/* <div className="fullname">
                     <div className="formField firstName">
                         <label htmlFor="firstName">First name</label>
                         <input 
@@ -60,7 +70,7 @@ const SignupForm = () => {
                             onChange={event => setLastName(event.target.value)}
                         />
                     </div>
-                </div>
+                </div> */}
                 <div className="formField email">
                     <label htmlFor="email">Email</label>
                     <input 
@@ -91,15 +101,31 @@ const SignupForm = () => {
                         onChange={event => setPass(event.target.value)}
                     />
                 </div>
-                <button className="btn signupBtn">Signup</button>
+                <div className="prompt capitalize">
+                    <input 
+                        type={'checkbox'}
+                    />
+                    <p>
+                        i have agree to the <span>terms & conditions</span> and the <span>privacy & policy</span> of this website.
+                    </p>
+                </div>
+                <div>
+                    <button className="btn signupBtn capitalize">Sign up</button>
+                </div>
             </form>
-            <div>
+            <div className="alt capitalize">
                 <p>
-                    Have an account? login here
+                    already have an existing account? <Link to={'/login'}>click here.....</Link>
                 </p>
             </div>
-        </main>
+        </Wrapper>
+        <Footer />
+        </>
     )
 }
+
+const Wrapper = styled.main`
+
+`
 
 export default SignupForm

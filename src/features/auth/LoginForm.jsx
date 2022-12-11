@@ -1,7 +1,10 @@
 import { useState, useContext } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
 import { Context } from "../../app/AppContext"
+import styled from "styled-components"
+import logo from '../../images/logo.png'
+import Footer from "../../components/Footer"
 
 const LoginForm = () => {
     const [username, setUsername ]= useState('')
@@ -29,35 +32,55 @@ const LoginForm = () => {
     }
 
     return (
-        <main>
-            <form onSubmit={formSubmit}>
-                <div className="username">
-                    <label htmlFor="username">Username</label>
-                    <input
-                        id="username"
-                        name="username" 
-                        type="text" 
-                        value={username}
-                        onChange={event => setUsername(event.target.value)}
-                    />
+        <>
+
+            <Wrapper className="auth-page">
+                <article>
+                    <img src={logo} alt='giftedbrain' className="logo" />
+                    <h2>sign in</h2>
+                </article>
+                <form onSubmit={formSubmit}>
+                    <div className="username">
+                        <label htmlFor="username">Username</label>
+                        <input
+                            id="username"
+                            name="username" 
+                            type="text" 
+                            value={username}
+                            onChange={event => setUsername(event.target.value)}
+                        />
+                    </div>
+                    <div className="password">
+                        <label htmlFor="password">Password</label>
+                        <input 
+                            type="password" 
+                            name="password" 
+                            id="password" 
+                            value={password}
+                            onChange={event => setPassword(event.target.value)}
+                        />
+                    </div>
+                    <div className="prompt capitalize">
+                        <input 
+                            type={'checkbox'}
+                        />
+                        <p>
+                            remember me
+                        </p>
+                    </div>
+                    <div>
+                        <button className="btn loginBtn capitalize">login</button>
+                    </div>
+                </form>
+                <div className="alt capitalize">
+                    <p>Don't have an account? <Link to={'/signup'}>click here.....</Link></p>
                 </div>
-                <div className="password">
-                    <label htmlFor="password">Password</label>
-                    <input 
-                        type="password" 
-                        name="password" 
-                        id="password" 
-                        value={password}
-                        onChange={event => setPassword(event.target.value)}
-                    />
-                </div>
-                <button className="btn loginBtn">login</button>
-            </form>
-            <div>
-                <p>Don't have an account? signup here</p>
-            </div>
-        </main>
+            </Wrapper>
+            <Footer />
+        </>
     )
 }
 
+const Wrapper = styled.main`
+`
 export default LoginForm

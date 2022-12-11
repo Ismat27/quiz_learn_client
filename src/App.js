@@ -14,6 +14,7 @@ import Payment from './features/dashboard/pages/Payment';
 import Skill from './features/dashboard/pages/Skill';
 import Profile from './features/dashboard/pages/Profile';
 import NewQuestion from './features/admin/pages/NewQuestion';
+import Pricing from './components/Pricing';
 import './App.css';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
       <Route path='' element={<HomePage/>}/>
       <Route path='login' element={<LoginForm/>}/>
       <Route path='signup' element={<SignupForm/>}/>
+      <Route path='pricing' element={<Pricing/>}/>
       <Route element={<ProtectedRoute />}>
         <Route path='dashboard' element={<Dashboard/>}>
           <Route index element={<DashboardHome/>}/>
