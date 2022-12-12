@@ -8,7 +8,7 @@ import { Context } from '../../../app/AppContext'
 import { FiLogOut } from "react-icons/fi"
 
 
-const SidebarNav = ({open, handleOpen}) => {
+const SidebarNav = ({open, handleOpen, closeSidebar}) => {
 
     const {setLogin, setToken} = useContext(Context)
     const logout = () => {
@@ -35,6 +35,7 @@ const SidebarNav = ({open, handleOpen}) => {
                                 <NavLink
                                     className={'sidebar-link'}
                                     to={item.to}
+                                    onClick={closeSidebar}
                                 >
                                     <span>{item.icon}</span>
                                     <span className='sidebar-text capitalize'>{item.text}</span>
@@ -52,6 +53,7 @@ const SidebarNav = ({open, handleOpen}) => {
                                 <NavLink
                                     className={'sidebar-link'}
                                     to={item.to}
+                                    onClick={closeSidebar}
                                 >
                                     <span>{item.icon}</span>
                                     <span className='sidebar-text capitalize'>{item.text}</span>
@@ -67,6 +69,7 @@ const SidebarNav = ({open, handleOpen}) => {
                         return (
                             <li key={index} className='sidebar-item'>
                                 <NavLink
+                                onClick={closeSidebar}
                                     className={'sidebar-link'}
                                     to={item.to}
                                 >
@@ -77,17 +80,17 @@ const SidebarNav = ({open, handleOpen}) => {
                         )
                     })
                 }
+                <li className='sidebar-item'>
+                    <Link 
+                        className='sidebar-link logout' 
+                        onClick={logout} 
+                        to={'/'}
+                    >
+                        <span><FiLogOut /></span>
+                        <span className='sidebar-text capitalize'>log out</span>
+                    </Link>
+                </li>
             </ul>
-            <li>
-                <Link 
-                    className='capitalize sidebar-link logout' 
-                    onClick={logout} 
-                    to={'/'}
-                >
-                    <span><FiLogOut /></span>
-                    <span className='sidebar-text'>log out</span>
-                </Link>
-            </li>
         </nav>
     </Wrapper>
   )
@@ -150,12 +153,6 @@ svg {
     color: var(--white-color);
     svg, a {
         color: var(--white-color);
-    }
-}
-.logout {
-    padding-bottom: 6rem;
-    .sidebar-text, svg {
-        color: red;
     }
 }
 @media (min-width: 992px) {

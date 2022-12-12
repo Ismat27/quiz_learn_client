@@ -12,6 +12,10 @@ const Dashboard = () => {
     const toggleNav = () => {
         setSideOpen(!sideOpen)
     }
+
+    const closeSidebar = () => {
+        setSideOpen(false)
+    }
     
     return (
         <>
@@ -19,6 +23,7 @@ const Dashboard = () => {
                 <SidebarNav 
                     open={sideOpen}
                     handleOpen={toggleNav}
+                    closeSidebar={closeSidebar}
                 />
                 <div className="aa">
                     <header>
