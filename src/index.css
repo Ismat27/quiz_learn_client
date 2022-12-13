@@ -154,6 +154,20 @@ aside.open {
     width: 50px;
 }
 
+.dashboard-layout {
+  max-width: 1440px;
+  margin: auto;
+}
+
+.dashboard-content {
+  width: 90%;
+  margin: auto;
+}
+
+@media (min-width: 576px) {
+
+}
+
 @media (min-width: 992px) {
   aside {
     transform: translateX(0);
@@ -166,4 +180,5 @@ aside.open {
   .dashboard-layout header {
     display: none;
   }
+
 }

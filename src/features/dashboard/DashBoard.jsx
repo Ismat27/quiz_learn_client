@@ -35,9 +35,11 @@ const Dashboard = () => {
                             />
                         </div>
                     </header>
-                    <main>
-                        <Outlet/>
-                    </main>
+                    <div className="dashboard-content">
+                        <main>
+                            <Outlet/>
+                        </main>
+                    </div>
                 </div>
             </Wrapper>
         </>   
