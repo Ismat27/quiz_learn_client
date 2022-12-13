@@ -3,6 +3,7 @@ import axios from "axios"
 import { Context } from "../../../app/AppContext"
 import UserAssets from "../components/UserAssets"
 import EarningsHistory from "../components/EarningsHistory"
+import styled from "styled-components"
 
 const DashboardHome = () => {
     const [referrals, setReferrals] = useState([])
@@ -34,15 +35,29 @@ const DashboardHome = () => {
     // }
 
     return (
-        <div className="dashboard-home">
+        <Wrapper className="dashboard-home">
             <h1>Dashboard</h1>
+            <p className="capitalize welcome-p">
+                <strong>welcome, jays</strong>
+            </p>
             <UserAssets />
             <EarningsHistory />
             {referrals.map((user) => {
                 return <h4 key={user.referred_user}>{user.referred_user}</h4>
             })}
-        </div>
+        </Wrapper>
     )
 }
+
+const Wrapper = styled.div`
+padding-block: 1rem;
+
+@media (min-width: 768px) {
+  
+}
+@media (min-width: 992px) {
+    padding-block: 2rem;
+}
+`
 
 export default DashboardHome

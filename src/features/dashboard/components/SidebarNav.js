@@ -138,8 +138,7 @@ li {
 }
 .sidebar-link.active, .sidebar-link:hover {
     background: #5852FE;
-    color: var(--white-color);
-    svg {
+    * {
         color: var(--white-color);
     }
 }
@@ -155,6 +154,11 @@ svg {
         color: var(--white-color);
     }
 }
+.logout, .logout:hover {
+    * {
+        color: #eb2132;
+    }
+} 
 @media (min-width: 992px) {
     ${'' /* position: unset; */}
     max-width: 250px;
