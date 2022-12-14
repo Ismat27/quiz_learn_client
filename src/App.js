@@ -8,6 +8,7 @@ import DashboardHome from './features/dashboard/pages/DashboardHome';
 import ReferralHistory from './features/dashboard/pages/ReferralHistory';
 import Spin from './features/dashboard/pages/Spin';
 import QuizPage from './features/dashboard/pages/QuizPage';
+import PlayAndWin from './features/dashboard/pages/PlayAndWin';
 import EarningHistory from './features/dashboard/pages/EarningHistory';
 import LeaderBoard from './features/dashboard/pages/LeaderBoard';
 import Payment from './features/dashboard/pages/Payment';
@@ -30,7 +31,7 @@ function App() {
         <Route element={<Dashboard/>}>
           <Route path='dashboard' element={<DashboardHome/>}/>
           <Route path='skill' element={<Skill/>}/>
-          <Route path='quiz' element={<QuizPage/>}/>
+          <Route path='quiz' element={<PlayAndWin/>}/>
           <Route path='spin' element={<Spin/>}/>
           <Route path='profile' element={<Profile/>}/>
           <Route path='payment' element={<Payment/>}/>
