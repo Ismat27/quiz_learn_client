@@ -1,6 +1,8 @@
 import { useState, createContext, useContext } from "react";
 import jwt_decode from 'jwt-decode'
 export const Context = createContext() 
+let user  = localStorage.getItem('userDetails') || '{}'
+user = JSON.parse(user)
 
 const AppContext = ({stored_token, children}) => {
 
@@ -13,13 +15,26 @@ const AppContext = ({stored_token, children}) => {
         tokenExpired = expDate.getTime() < new Date().getTime()
     }
     
+    const [userDetails, setUserDetails] = useState(tokenExpired?{}:user)
     const [login , setLogin] = useState(tokenExpired?false:true)
     const [token, setToken] = useState(stored_token)
+
+    const logoutFunction = () => {
+        localStorage.setItem('token', '')
+        setLogin(false)
+        setToken('')
+        setUserDetails({})
+        localStorage.setItem('userDetails', '{}')
+    }
+
     const contextValue = {
         login,
         setLogin,
         token,
-        setToken
+        setToken,
+        userDetails,
+        setUserDetails,
+        logoutFunction
     }
     return (
         <Context.Provider value={contextValue}>

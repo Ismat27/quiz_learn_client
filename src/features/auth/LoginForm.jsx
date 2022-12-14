@@ -5,8 +5,10 @@ import { Context } from "../../app/AppContext"
 import styled from "styled-components"
 import logo from '../../images/logo.png'
 import Footer from "../../components/Footer"
+import { useGlobalContext } from "../../app/AppContext"
 
 const LoginForm = () => {
+    const {setUserDetails} = useGlobalContext()
     const [username, setUsername ]= useState('')
     const [password, setPassword] = useState('')
     const {setLogin, setToken} = useContext(Context)
@@ -18,12 +20,14 @@ const LoginForm = () => {
         })
         .then(response => {
             const data = response.data
-            const {token} = data
+            const {token, user} = data
             localStorage.setItem('token', token)
+            localStorage.setItem('userDetails', JSON.stringify(user))
             setToken(token)
             setPassword('')
             setUsername('')
             setLogin(true)
+            setUserDetails(user)
             nav('/dashboard')
         })
         .catch(error => {

@@ -1,22 +1,16 @@
-import React, { useContext } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { sidebarItems, sidebarItemsLower, sidebarItemsUpper } from '../data/sidebar'
 import Hamburger from '../../../components/Hamburger'
 import Logo from '../../../components/Logo'
-import { Context } from '../../../app/AppContext'
+import { useGlobalContext } from '../../../app/AppContext'
 import { FiLogOut } from "react-icons/fi"
 
 
 const SidebarNav = ({open, handleOpen, closeSidebar}) => {
 
-    const {setLogin, setToken} = useContext(Context)
-    const logout = () => {
-        localStorage.setItem('token', '')
-        setLogin(false)
-        setToken('')
-    }
-
+    const { logoutFunction } = useGlobalContext()
+    
   return (
     <Wrapper className={`${open? 'open': ''}`}>
         <div className='header'>
@@ -83,7 +77,7 @@ const SidebarNav = ({open, handleOpen, closeSidebar}) => {
                 <li className='sidebar-item'>
                     <Link 
                         className='sidebar-link logout' 
-                        onClick={logout} 
+                        onClick={logoutFunction} 
                         to={'/'}
                     >
                         <span><FiLogOut /></span>
