@@ -7,7 +7,6 @@ import Dashboard from './features/dashboard/DashBoard';
 import DashboardHome from './features/dashboard/pages/DashboardHome';
 import ReferralHistory from './features/dashboard/pages/ReferralHistory';
 import Spin from './features/dashboard/pages/Spin';
-import QuizPage from './features/dashboard/pages/QuizPage';
 import PlayAndWin from './features/dashboard/pages/PlayAndWin';
 import EarningHistory from './features/dashboard/pages/EarningHistory';
 import LeaderBoard from './features/dashboard/pages/LeaderBoard';
@@ -16,6 +15,7 @@ import Skill from './features/dashboard/pages/Skill';
 import Profile from './features/dashboard/pages/Profile';
 import NewQuestion from './features/admin/pages/NewQuestion';
 import Pricing from './components/Pricing';
+import Community from './features/dashboard/pages/Community';
 import './App.css';
 
 function App() {
@@ -38,6 +38,7 @@ function App() {
           <Route path='leaderboard' element={<LeaderBoard/>}/>
           <Route path='referral' element={<ReferralHistory/>}/>
           <Route path='earning' element={<EarningHistory/>}/>
+          <Route path='community' element={<Community/>}/>
         </Route>
         <Route path='set-question' element={<NewQuestion/>}/>
       </Route>
