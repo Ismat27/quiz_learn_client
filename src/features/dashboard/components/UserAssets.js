@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const UserAssets = () => {
+const UserAssets = ({total_referrals, total_points}) => {
   return (
     <Wrapper>
         <article className='total-earnings capitalize'>
@@ -11,13 +11,13 @@ const UserAssets = () => {
 
         <article className='total-points capitalize'>
             <h3>total points</h3>
-            <span className='value'>2000</span>
+            <span className='value'>{total_points}</span>
             <span className='unit'>SQP</span>
         </article>
 
         <article className='referral-earnings capitalize'>
             <h3>total referrals</h3>
-            <span className='value'>#12,000</span>
+            <span className='value'>{total_referrals}</span>
         </article>
     </Wrapper>
   )

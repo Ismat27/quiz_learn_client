@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { earningsData } from '../data/earnings'
 
-const EarningsHistory = () => {
+const EarningsHistory = ({data}) => {
   return (
     <Wrapper>
         <h2 className='capitalize'>earnings history</h2>
@@ -14,13 +13,13 @@ const EarningsHistory = () => {
             <span className='points'>points</span>
           </article>
           {
-            earningsData.map((data, index) => {
+            data.map((record, index) => {
               return (
-                <article role={'row'} className='earning capitalize' key={data.id}>
+                <article role={'row'} className='earning capitalize' key={record.id}>
                   <span className='index'>{index + 1}</span>
-                  <span className='task'>{data.category}</span>
-                  <span className='total-answered'>{data.total_answered}</span>
-                  <span className='points'>{data.ponits}pts</span>
+                  <span className='task'>{record.category || 'general'}</span>
+                  <span className='total-answered'>{15}</span>
+                  <span className='points'>{record.score}pts</span>
                 </article>
               )
             })
