@@ -87,12 +87,6 @@ max-width: 600px;
 .section-header {
   margin-bottom: 3rem;
 }
-.section-info {
-  font-weight: 600;
-  color: rgba(0, 0, 0, 0.49);
-  font-size: 18px;
-  margin-top: .5rem;
-}
 img {
   border-radius: 50%;
   width: 150px;

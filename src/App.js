@@ -16,6 +16,7 @@ import Profile from './features/dashboard/pages/Profile';
 import NewQuestion from './features/admin/pages/NewQuestion';
 import Pricing from './components/Pricing';
 import Community from './features/dashboard/pages/Community';
+import Support from './features/dashboard/pages/Support';
 import './App.css';
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
           <Route path='referral' element={<ReferralHistory/>}/>
           <Route path='earning' element={<EarningHistory/>}/>
           <Route path='community' element={<Community/>}/>
+          <Route path='help' element={<Support/>}/>
         </Route>
         <Route path='set-question' element={<NewQuestion/>}/>
       </Route>
