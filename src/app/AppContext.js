@@ -27,6 +27,11 @@ const AppContext = ({stored_token, children}) => {
         localStorage.setItem('userDetails', '{}')
     }
 
+    const updateUserDetails = (data) => {
+        setUserDetails(data)
+        localStorage.setItem('userDetails', JSON.stringify(data))
+    }
+
     const contextValue = {
         login,
         setLogin,
@@ -34,7 +39,8 @@ const AppContext = ({stored_token, children}) => {
         setToken,
         userDetails,
         setUserDetails,
-        logoutFunction
+        logoutFunction,
+        updateUserDetails,
     }
     return (
         <Context.Provider value={contextValue}>
