@@ -1,12 +1,13 @@
 import { useRef, useState } from "react"
 import styled from "styled-components"
 import { useGlobalContext } from "../../../app/AppContext"
+import axios from "axios"
 
 const BASE_URL = process.env.REACT_APP_BASE_API_URL
 
 const Profile = () => {
 
-  const {logoutFunction, userDetails} = useGlobalContext()
+  const {logoutFunction, userDetails, updateUserDetails} = useGlobalContext()
 
   const usernameRef = useRef(null)
   const [username, setUsername] = useState(userDetails.username)
@@ -14,9 +15,18 @@ const Profile = () => {
   const emailRef = useRef(null)
 
   function submitForm(event) {
+    axios.put(`${BASE_URL}/users/1/`, {username, email})
+    .then(response => {
+      const { data }= response
+      console.log(data);
+      updateUserDetails(data)
+      setEmail("")
+      setUsername("")
+    })
+    .catch((error) => {
+      console.log(error);
+    })
     event.preventDefault()
-    setEmail("")
-    setUsername("")
   }
 
 
