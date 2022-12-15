@@ -31,6 +31,24 @@ a {
 .btn {
   cursor: pointer;
 }
+.action-btn {
+  font-weight: 600;
+  padding: 0.3rem;
+  border-radius: 10px;
+  border: 2px solid var(--bg-blue);
+  background-color: transparent;
+}
+.action-btn2 {
+  min-width: 150px;
+  max-width: 200px;
+  background-color: var(--bg-blue);
+  color: var(--white-color);
+  border: none;
+  border-radius: 10px;
+  padding: 1rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
 .capitalize {
   text-transform: capitalize;
 }
@@ -170,14 +188,6 @@ aside.open {
 }
 
 /*  no quiz */
-.action-btn {
-  font-weight: 600;
-  padding: 0.3rem;
-  border-radius: 10px;
-  border: 2px solid var(--bg-blue);
-  background-color: transparent;
-}
-
 .no-quiz .action-btn {
   width: 200px;
   font-size: 18px;
