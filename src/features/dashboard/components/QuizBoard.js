@@ -60,6 +60,7 @@ const QuizBoard = ({ endQuizMode }) => {
           setError(false)
           setLoading(true)
           console.log(data);
+          endQuizMode()
         })
         .catch(error => {
           console.log(error);
