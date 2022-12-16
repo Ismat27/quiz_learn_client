@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import { useGlobalContext } from '../../../app/AppContext'
 import { useNavigate } from 'react-router-dom'
 
+const BASE_URL = process.env.REACT_APP_BASE_API_URL
+
 const QuizBoard = ({ endQuizMode }) => {
 
     const { token } = useGlobalContext()
@@ -48,7 +50,7 @@ const QuizBoard = ({ endQuizMode }) => {
     }
 
     const submitQuiz = () => {
-        axios.post('http://127.0.0.1:8000/mark-quiz/', { answers: userAnswers, quiz_id }, {
+        axios.post(`${BASE_URL}/mark-quiz/`, { answers: userAnswers, quiz_id }, {
           headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${token}` }
         } )
         .then(response => {
@@ -68,7 +70,7 @@ const QuizBoard = ({ endQuizMode }) => {
       }
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/quiz-question/', {
+        axios.get(`${BASE_URL}/quiz-question/`, {
           headers: { Authorization : `Token ${token}` }
         })
         .then(response => {
