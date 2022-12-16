@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
 import styled from 'styled-components'
 import Footer from './Footer'
+import { useGlobalContext } from '../app/AppContext'
+import { useNavigate } from 'react-router-dom'
 
 const Pricing = () => {
 
-    const [plan, setPlan] = useState(null)
+    const {plan, setPlan} = useGlobalContext()
+    const navigate = useNavigate()
 
   return (
     <>
@@ -44,7 +46,12 @@ const Pricing = () => {
                     <p>3 winners</p>
                 </article>
             </div>
-            <button className='btn'>continue</button>
+            <button 
+                className='btn'
+                onClick={() => navigate('/payment')}
+            >
+            continue
+            </button>
         </Wrapper>
         <Footer/>
     </>

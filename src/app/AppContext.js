@@ -19,6 +19,12 @@ const AppContext = ({stored_token, children}) => {
     const [login , setLogin] = useState(tokenExpired?false:true)
     const [token, setToken] = useState(stored_token)
 
+    const [plan, setPlan] = useState('monthly')
+    const price = {
+        monthly: 460000, // in kobo
+        weekly: 240000
+    }
+
     const logoutFunction = () => {
         localStorage.setItem('token', '')
         setLogin(false)
@@ -41,6 +47,7 @@ const AppContext = ({stored_token, children}) => {
         setUserDetails,
         logoutFunction,
         updateUserDetails,
+        plan, setPlan, price
     }
     return (
         <Context.Provider value={contextValue}>
