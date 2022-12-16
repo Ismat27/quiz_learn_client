@@ -4,6 +4,8 @@ import InputOption from '../components/InputOption'
 import PointOption from '../components/PointOption'
 import '../styles/Question.css'
 
+const BASE_URL = process.env.REACT_APP_BASE_API_URL
+
 const NewQuestion = () => {
 
     const { token } = useContext(Context)
@@ -38,7 +40,7 @@ const NewQuestion = () => {
             headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${token}`  },
             body: JSON.stringify(data)
         };
-        fetch('http://127.0.0.1:8000/questions/', requestOptions)
+        fetch(`${BASE_URL}/questions/`, requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
