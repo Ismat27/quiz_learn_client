@@ -7,6 +7,8 @@ import logo from '../../images/logo.png'
 import Footer from "../../components/Footer"
 import { useGlobalContext } from "../../app/AppContext"
 
+const BASE_URL = process.env.REACT_APP_BASE_API_URL
+
 const LoginForm = () => {
     const {setUserDetails} = useGlobalContext()
     const [username, setUsername ]= useState('')
@@ -15,7 +17,7 @@ const LoginForm = () => {
     const nav = useNavigate()
     const formSubmit = (event) => {
         event.preventDefault()
-        axios.post('http://127.0.0.1:8000/login/', {
+        axios.post(`${BASE_URL}/login/`, {
             username, password
         })
         .then(response => {

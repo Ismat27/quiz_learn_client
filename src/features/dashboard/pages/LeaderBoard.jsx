@@ -3,13 +3,15 @@ import axios from "axios"
 import { Context } from "../../../app/AppContext"
 import styled from "styled-components"
 
+const BASE_URL = process.env.REACT_APP_BASE_API_URL
+
 const LeaderBoard = () => {
   const [leaderboardData, setLeaderboardData] = useState([])
   const { token } = useContext(Context)
 
   const getData = useCallback(async () => {
     try {
-      const response = await axios('http://127.0.0.1:8000/leaderboard/', {
+      const response = await axios(`${BASE_URL}/leaderboard/`, {
         headers: {
           Authorization: `Token ${token}`
         }

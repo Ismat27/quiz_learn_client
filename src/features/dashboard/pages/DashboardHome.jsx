@@ -5,6 +5,8 @@ import UserAssets from "../components/UserAssets"
 import EarningsHistory from "../components/EarningsHistory"
 import styled from "styled-components"
 
+const BASE_URL = process.env.REACT_APP_BASE_API_URL
+
 const DashboardHome = () => {
     const [referrals, setReferrals] = useState([])
     const [quizSessions, setQuizSessions] = useState([])
@@ -13,7 +15,7 @@ const DashboardHome = () => {
 
     const {token, setLogin, userDetails} =  useGlobalContext()
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/dashboard/', {
+        axios.get(`${BASE_URL}/dashboard/`, {
             headers: {
                 'Authorization': `Token ${token}`,
                 'Content-Type': 'application/json'

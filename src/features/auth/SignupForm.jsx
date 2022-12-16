@@ -5,6 +5,8 @@ import styled from "styled-components"
 import { Link, useNavigate } from "react-router-dom"
 import Footer from "../../components/Footer"
 
+const BASE_URL = process.env.REACT_APP_BASE_API_URL
+
 const USERNAME_REGEX = /^[a-zA-Z_-]{3,16}$/igm
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
 const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm
@@ -36,7 +38,7 @@ const SignupForm = () => {
         //     alert('password does not meet requiements')
         //     return
         // }
-        axios.post('http://127.0.0.1:8000/signup/', {
+        axios.post(`${BASE_URL}/signup/`, {
             username, 
             first_name:firstName, 
             last_name:lastName, 

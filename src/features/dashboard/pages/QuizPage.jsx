@@ -16,6 +16,8 @@ const answers = [
   }
 ]
 
+const BASE_URL = process.env.REACT_APP_BASE_API_URL
+
 const QuizPage = () => {
 
   const {token} = useContext(Context)
@@ -38,7 +40,7 @@ const QuizPage = () => {
 
   const submitQuiz = (event) => {
     event.preventDefault()
-    axios.post('http://127.0.0.1:8000/mark-quiz/', { answers: userAnswers, quiz_id }, {
+    axios.post(`${BASE_URL}/mark-quiz/`, { answers: userAnswers, quiz_id }, {
       headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${token}` }
     } )
     .then(response => {
