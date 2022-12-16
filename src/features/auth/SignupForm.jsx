@@ -21,21 +21,21 @@ const SignupForm = () => {
 
     const formSubmit = (event) => {
         event.preventDefault()
-        const test1 = USERNAME_REGEX.test(username)
-        const test2 = EMAIL_REGEX.test(email)
-        const test3 = PASSWORD_REGEX.test(password)
-        if (!test1) {
-            alert('username does not meet requiements')
-            return
-        }
-        if (!test2) {
-            alert('email does not meet requiements')
-            return
-        }
-        if (!test3) {
-            alert('password does not meet requiements')
-            return
-        }
+        // const test1 = USERNAME_REGEX.test(username)
+        // const test2 = EMAIL_REGEX.test(email)
+        // const test3 = PASSWORD_REGEX.test(password)
+        // if (!test1) {
+        //     alert('username does not meet requiements')
+        //     return
+        // }
+        // if (!test2) {
+        //     alert('email does not meet requiements')
+        //     return
+        // }
+        // if (!test3) {
+        //     alert('password does not meet requiements')
+        //     return
+        // }
         axios.post('http://127.0.0.1:8000/signup/', {
             username, 
             first_name:firstName, 
