@@ -2,8 +2,12 @@ import { useState } from "react"
 import axios from "axios"
 import logo from '../../images/logo.png'
 import styled from "styled-components"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Footer from "../../components/Footer"
+
+const USERNAME_REGEX = /^[a-zA-Z_-]{3,16}$/igm
+const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm
 
 const SignupForm = () => {
     const [username, setUsername] = useState('')
@@ -13,8 +17,25 @@ const SignupForm = () => {
     const [password, setPassword] = useState('')
     const [pass, setPass] = useState('')
 
+    const nav = useNavigate()
+
     const formSubmit = (event) => {
         event.preventDefault()
+        const test1 = USERNAME_REGEX.test(username)
+        const test2 = EMAIL_REGEX.test(email)
+        const test3 = PASSWORD_REGEX.test(password)
+        if (!test1) {
+            alert('username does not meet requiements')
+            return
+        }
+        if (!test2) {
+            alert('email does not meet requiements')
+            return
+        }
+        if (!test3) {
+            alert('password does not meet requiements')
+            return
+        }
         axios.post('http://127.0.0.1:8000/signup/', {
             username, 
             first_name:firstName, 
@@ -22,10 +43,11 @@ const SignupForm = () => {
             password, 
             email
         })
-        .then(response => {
+        .then((response) => {
+            nav('/login')
             console.log(response.data);
         })
-        .catch(error => {
+        .catch((error) => {
             console.log(error);
         })
     }
