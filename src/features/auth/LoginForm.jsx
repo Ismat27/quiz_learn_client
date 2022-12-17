@@ -7,7 +7,7 @@ import logo from '../../images/logo.png'
 import Footer from "../../components/Footer"
 import { useGlobalContext } from "../../app/AppContext"
 
-import Alert from '@mui/material/Alert';
+import { LinearProgress, Alert } from '@mui/material';
 
 const BASE_URL = process.env.REACT_APP_BASE_API_URL
 
@@ -63,9 +63,7 @@ const LoginForm = () => {
             }
             {
                 logingIn &&
-            <Alert variant="filled" severity="info">
-                Loging in, please hold on
-            </Alert>
+                <LinearProgress />
             }
             <Wrapper className="auth-page">
                 <article>
