@@ -3,7 +3,7 @@ import React from 'react'
 const PointOption = ({name, value, change}) => {
     return (
         <div className='form-field point-option'>
-            <label htmlFor={name}>{name}</label>
+            <label htmlFor={name}>{name.replace("_", " ")}</label>
             <input 
                 type="number" 
                 id={name} 

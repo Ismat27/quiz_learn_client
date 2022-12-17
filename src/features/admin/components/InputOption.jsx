@@ -1,7 +1,7 @@
 const InputOption = ({name, value, change}) => {
   return (
     <div className='form-field'>
-        <label htmlFor={name}>{name}</label>
+        <label htmlFor={name}>{name.replace('_', ' ')}</label>
         <textarea 
             type="text"
             rows={5}

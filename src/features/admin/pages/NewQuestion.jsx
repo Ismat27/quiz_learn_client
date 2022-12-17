@@ -1,4 +1,6 @@
+import axios from 'axios'
 import React, { useState, useContext } from 'react'
+import styled from 'styled-components'
 import { Context } from '../../../app/AppContext'
 import InputOption from '../components/InputOption'
 import PointOption from '../components/PointOption'
@@ -35,34 +37,29 @@ const NewQuestion = () => {
     }
     const formSubmit = (event) => {
         event.preventDefault()
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${token}`  },
-            body: JSON.stringify(data)
-        };
-        fetch(`${BASE_URL}/questions/`, requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    setData(initialData)
-                    console.log('success');
-                }
-                else {
-                    console.log('failed');
-                    console.log(data);
-                }
-            })
-            .catch(error => {
-                console.log(error);
-            });
+
+        axios.post(`${BASE_URL}/questions/`, data,{
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${token}` }
+        })
+        .then((response) => {
+            setData(initialData)
+            console.log(response.data);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
     }
 
   return (
-    <div className='formQuestion-container'>
+    <Wrapper className='formQuestion-container'>
+        <div className='capitalize section-header'>
+            <h1 className='section-title'>new question</h1>
+            <p className='section-info'>set a new quiz question</p>
+        </div>
         <form onSubmit={formSubmit}>
             <div className='form-field'>
                 <label className='' htmlFor='text'>Question:</label>
-                <textarea rows={15} name='text' id='text' value={data.text} onChange={getFormData}/>
+                <textarea rows={10} name='text' id='text' value={data.text} onChange={getFormData}/>
             </div>
             <InputOption name={'answer'} value={data.answer} change={getFormData}/>
             <div className='options'>
@@ -77,10 +74,26 @@ const NewQuestion = () => {
                 <PointOption name='cp_right' value={data.cp_right} change={getFormData}/>
                 <PointOption name='cp_wrong' value={data.cp_wrong} change={getFormData}/>
             </div>
-            <button type='submit' className='btn submit-btn'>submit</button>
+            <button type='submit' className='btn submit-btn action-btn2'>submit</button>
         </form>
-    </div>
+    </Wrapper>
   )
 }
+
+const Wrapper = styled.section`
+padding-block: 2rem;
+.section-header {
+    margin-bottom: 1rem;
+}
+input, textarea {
+  display: block;
+  width: 100%;
+  margin-top: .3rem;
+  border: 1px solid #7B7373;
+  padding: .5rem;
+  outline: none;
+  font-size: 18px;
+}
+`
 
 export default NewQuestion
