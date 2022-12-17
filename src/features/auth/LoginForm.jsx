@@ -7,6 +7,8 @@ import logo from '../../images/logo.png'
 import Footer from "../../components/Footer"
 import { useGlobalContext } from "../../app/AppContext"
 
+import Alert from '@mui/material/Alert';
+
 const BASE_URL = process.env.REACT_APP_BASE_API_URL
 
 const LoginForm = () => {
@@ -15,7 +17,13 @@ const LoginForm = () => {
     const [password, setPassword] = useState('')
     const {setLogin, setToken} = useContext(Context)
     const nav = useNavigate()
+
+    const [error, setError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
+    const [logingIn, setLogingIn] = useState(false)
+
     const formSubmit = (event) => {
+        setLogingIn(true)
         event.preventDefault()
         axios.post(`${BASE_URL}/login/`, {
             username, password
@@ -25,6 +33,7 @@ const LoginForm = () => {
             const {token, user} = data
             localStorage.setItem('token', token)
             localStorage.setItem('userDetails', JSON.stringify(user))
+            setLogingIn(false)
             setToken(token)
             setPassword('')
             setUsername('')
@@ -33,17 +42,35 @@ const LoginForm = () => {
             nav('/dashboard')
         })
         .catch(error => {
-            console.log(error);
+            let message='unable to login'
+            if (error.response) {
+                message = error.response.data.message
+            }
+            setErrorMessage(message)
+            setError(true)
+            setLogingIn(false)
         })
     }
 
     return (
         <>
-
+            {
+                error &&
+            <Alert onClose={() => {setError(false)}} variant="filled" severity="error">
+                {errorMessage}
+            </Alert>
+            
+            }
+            {
+                logingIn &&
+            <Alert variant="filled" severity="info">
+                Loging in, please hold on
+            </Alert>
+            }
             <Wrapper className="auth-page">
                 <article>
                     <img src={logo} alt='giftedbrain' className="logo" />
-                    <h2>sign in</h2>
+                    <h2 className="section-title">sign in</h2>
                 </article>
                 <form onSubmit={formSubmit}>
                     <div className="username">
