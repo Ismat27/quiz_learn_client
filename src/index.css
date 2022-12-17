@@ -69,6 +69,7 @@ a {
 
 .auth-page h2 {
   text-transform: capitalize;
+  margin: 1rem 0;
 }
 .auth-page article {
   text-align: center;
