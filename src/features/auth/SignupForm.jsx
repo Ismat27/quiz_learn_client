@@ -5,6 +5,8 @@ import styled from "styled-components"
 import { Link, useNavigate } from "react-router-dom"
 import Footer from "../../components/Footer"
 
+import { LinearProgress, Alert } from '@mui/material';
+
 const BASE_URL = process.env.REACT_APP_BASE_API_URL
 
 const USERNAME_REGEX = /^[a-zA-Z_-]{3,16}$/igm
@@ -19,6 +21,10 @@ const SignupForm = () => {
     const [password, setPassword] = useState('')
     const [pass, setPass] = useState('')
 
+    const [error, setError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
+    const [signingUp, setSigningUp] = useState(false)
+
     const nav = useNavigate()
 
     const formSubmit = (event) => {
@@ -27,17 +33,21 @@ const SignupForm = () => {
         // const test2 = EMAIL_REGEX.test(email)
         // const test3 = PASSWORD_REGEX.test(password)
         // if (!test1) {
-        //     alert('username does not meet requiements')
+        //     setError(true)
+        //     setErrorMessage('username does not meet requiements')
         //     return
         // }
         // if (!test2) {
-        //     alert('email does not meet requiements')
+        //     setError(true)
+        //     setErrorMessage('email does not meet requiements')
         //     return
         // }
         // if (!test3) {
-        //     alert('password does not meet requiements')
+        //     setError(true)
+        //     setErrorMessage('password does not meet requiements')
         //     return
         // }
+        setSigningUp(true)
         axios.post(`${BASE_URL}/signup/`, {
             username, 
             first_name:firstName, 
@@ -45,17 +55,35 @@ const SignupForm = () => {
             password, 
             email
         })
-        .then((response) => {
+        .then(() => {
+            setSigningUp(false)
             nav('/login')
-            console.log(response.data);
         })
         .catch((error) => {
-            console.log(error);
+            setSigningUp(false)
+            setError(true)
+            let errorMsg = 'unable to sign up'
+            if (error.response) {
+                errorMsg = error.response.data.message
+            }
+            setErrorMessage(errorMsg)
         })
     }
 
     return (
         <>
+
+        {
+        error &&
+        <Alert onClose={() => {setError(false)}} variant="filled" severity="error">
+            {errorMessage}
+        </Alert>
+        
+        }
+        {
+            signingUp &&
+            <LinearProgress />
+        }
 
         <Wrapper className="auth-page">
             <article>
@@ -134,7 +162,7 @@ const SignupForm = () => {
                     </p>
                 </div>
                 <div>
-                    <button className="btn signupBtn capitalize">Sign up</button>
+                    <button disabled={signingUp} className="btn signupBtn capitalize">Sign up</button>
                 </div>
             </form>
             <div className="alt capitalize">
