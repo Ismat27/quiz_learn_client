@@ -100,7 +100,7 @@ const LoginForm = () => {
                         </p>
                     </div>
                     <div>
-                        <button className="btn loginBtn capitalize">login</button>
+                        <button disabled={logingIn} className="btn loginBtn capitalize">login</button>
                     </div>
                 </form>
                 <div className="alt capitalize">
