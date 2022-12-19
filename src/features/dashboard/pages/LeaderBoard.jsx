@@ -2,6 +2,7 @@ import { useState, useEffect, useContext, useCallback } from "react"
 import axios from "axios"
 import { Context } from "../../../app/AppContext"
 import styled from "styled-components"
+import CircularLoader from "../../../components/CircularLoader"
 
 const BASE_URL = process.env.REACT_APP_BASE_API_URL
 
@@ -55,7 +56,9 @@ const LeaderBoard = () => {
           })
         }
       </div> :
-      <p>no data</p>
+      <div className="loader">
+        <CircularLoader />
+      </div>
       }
     </Wrapper>
   )
@@ -70,7 +73,7 @@ padding-block: 1rem 2rem;
   margin-top: .5rem;
 }
 .leaderboard {
-  margin-top: 3rem;
+  margin-top: 1.5rem;
 }
 .board-item {
   display: grid;

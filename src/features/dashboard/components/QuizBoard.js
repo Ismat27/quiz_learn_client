@@ -3,6 +3,7 @@ import axios from 'axios'
 import styled from 'styled-components'
 import { useGlobalContext } from '../../../app/AppContext'
 import { useNavigate } from 'react-router-dom'
+import CircularLoader from '../../../components/CircularLoader'
 
 const BASE_URL = process.env.REACT_APP_BASE_API_URL
 
@@ -116,7 +117,7 @@ const QuizBoard = ({ endQuizMode }) => {
 
     if (loading) {
         return (
-            <h1>loading</h1>
+            <CircularLoader />
         )
     }
 
