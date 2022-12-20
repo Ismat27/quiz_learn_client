@@ -17,6 +17,7 @@ const QuizBoard = ({ endQuizMode }) => {
     const [userAnswers, setUserAnswers] = useState([])
     const [quiz_id, setQuiz_id] = useState('')
     const [currentAnswer, setCurrentAnswer] = useState('')
+    const [submitting, setSubmitting] = useState(false)
 
     const currentQuestion = questions[number]
 
@@ -51,22 +52,25 @@ const QuizBoard = ({ endQuizMode }) => {
     }
 
     const submitQuiz = () => {
+        setSubmitting(true)
         axios.post(`${BASE_URL}/mark-quiz/`, { answers: userAnswers, quiz_id }, {
           headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${token}` }
         } )
         .then(response => {
-          const {data} = response
-          setQuestions([])
-          setUserAnswers([])
-          setNumber(0)
-          setQuiz_id('')
-          setError(false)
-          setLoading(true)
-          console.log(data);
-          endQuizMode()
+            const {data} = response
+            setQuestions([])
+            setUserAnswers([])
+            setNumber(0)
+            setQuiz_id('')
+            setError(false)
+            setLoading(true)
+            console.log(data);
+            setSubmitting(false)
+            endQuizMode()
         })
         .catch(error => {
-          console.log(error);
+            setSubmitting(false)
+            console.log(error);
         })
       }
 
@@ -152,6 +156,7 @@ const QuizBoard = ({ endQuizMode }) => {
             </div>
             <button className='btn'
                 onClick={nextQuestion}
+                disabled={submitting}
             >
                 {number >= questions.length - 1? 'submit' : 'continue'}
             </button>
