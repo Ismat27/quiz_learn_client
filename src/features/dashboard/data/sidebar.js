@@ -15,7 +15,7 @@ const sidebarItemsUpper = [
         id: 0,
         text: 'dashboard',
         icon: <RiDashboard3Line />,
-        to: 'dashboard'
+        to: ''
     },
 ]
 const sidebarItems = [

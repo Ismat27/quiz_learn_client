@@ -29,8 +29,8 @@ function App() {
       <Route path='signup' element={<SignupForm/>}/>
       <Route path='pricing' element={<Pricing/>}/>
       <Route element={<ProtectedRoute />}>
-        <Route element={<Dashboard/>}>
-          <Route path='dashboard' element={<DashboardHome/>}/>
+        <Route path='dashboard' element={<Dashboard/>}>
+          <Route index element={<DashboardHome/>}/>
           <Route path='skill' element={<Skill/>}/>
           <Route path='quiz' element={<PlayAndWin/>}/>
           <Route path='spin' element={<Spin/>}/>
