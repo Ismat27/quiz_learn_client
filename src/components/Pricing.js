@@ -48,7 +48,7 @@ const Pricing = () => {
             </div>
             <button 
                 className='btn'
-                onClick={() => navigate('/payment')}
+                onClick={() => navigate('/dashboard/payment')}
             >
             continue
             </button>
