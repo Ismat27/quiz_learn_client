@@ -7,6 +7,8 @@ const BASE_URL = process.env.REACT_APP_BASE_API_URL
 
 const Profile = () => {
 
+  const [submitting, setSubmitting] = useState(false)
+
   const {logoutFunction, userDetails, updateUserDetails, token} = useGlobalContext()
 
   const usernameRef = useRef(null)
@@ -15,6 +17,8 @@ const Profile = () => {
   const emailRef = useRef(null)
 
   function submitForm(event) {
+    event.preventDefault()
+    setSubmitting(true)
     axios.put(`${BASE_URL}/users/${userDetails.id}/`, {username, email},
     {headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${token}` }}
     )
@@ -23,11 +27,12 @@ const Profile = () => {
       updateUserDetails(data)
       setEmail(data.email)
       setUsername(data.username)
+      setSubmitting(false)
     })
     .catch((error) => {
       console.log(error);
+      setSubmitting(false)
     })
-    event.preventDefault()
   }
 
 
@@ -84,8 +89,8 @@ const Profile = () => {
           </div>
         </div>
         <div className="btns-box">
-          <button type="submit" className="btn action-btn2">save</button>
-          <button onClick={logoutFunction} type="button" className="btn action-btn2">log out</button>
+          <button disabled={submitting} type="submit" className="btn action-btn2">save</button>
+          <button disabled={submitting} onClick={logoutFunction} type="button" className="btn action-btn2">log out</button>
         </div>
       </form>
     </Wrapper>
