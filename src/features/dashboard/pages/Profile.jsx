@@ -15,7 +15,7 @@ const Profile = () => {
   const emailRef = useRef(null)
 
   function submitForm(event) {
-    axios.put(`${BASE_URL}/users/1/`, {username, email})
+    axios.put(`${BASE_URL}/users/${userDetails.id}/`, {username, email})
     .then(response => {
       const { data }= response
       console.log(data);
