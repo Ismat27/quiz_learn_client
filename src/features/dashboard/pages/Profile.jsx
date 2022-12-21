@@ -7,7 +7,7 @@ const BASE_URL = process.env.REACT_APP_BASE_API_URL
 
 const Profile = () => {
 
-  const {logoutFunction, userDetails, updateUserDetails} = useGlobalContext()
+  const {logoutFunction, userDetails, updateUserDetails, token} = useGlobalContext()
 
   const usernameRef = useRef(null)
   const [username, setUsername] = useState(userDetails.username)
@@ -15,13 +15,14 @@ const Profile = () => {
   const emailRef = useRef(null)
 
   function submitForm(event) {
-    axios.put(`${BASE_URL}/users/${userDetails.id}/`, {username, email})
+    axios.put(`${BASE_URL}/users/${userDetails.id}/`, {username, email},
+    {headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${token}` }}
+    )
     .then(response => {
       const { data }= response
-      console.log(data);
       updateUserDetails(data)
-      setEmail("")
-      setUsername("")
+      setEmail(data.email)
+      setUsername(data.username)
     })
     .catch((error) => {
       console.log(error);
