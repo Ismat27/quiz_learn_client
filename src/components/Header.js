@@ -1,0 +1,146 @@
+import React, { useState, useRef, useEffect } from 'react'
+import styled from 'styled-components'
+import Logo from './Logo'
+import Hamburger from './Hamburger'
+import { Link } from 'react-router-dom'
+
+const Header = () => {
+
+    const [navOpen, setNavOpen] = useState(false)
+    const navContainerRef = useRef(null)
+    const navItemsRef = useRef(null)
+
+    useEffect(() => {
+        const linksHeight = navItemsRef.current.getBoundingClientRect().height;
+        if (navOpen) {
+            navContainerRef.current.style.height = `${linksHeight}px`
+        }
+        else {
+            navContainerRef.current.style.height = 0
+        }
+    }, [navOpen])
+
+    return (
+        <Wrapper>
+            <div className='header-content'>
+                <div className='lh'>
+                    <Logo />
+                    <Hamburger 
+                        open={navOpen}
+                        handleClick={() => setNavOpen(!navOpen)}
+                    />
+                </div>
+                <nav ref={navContainerRef} className='nav'>
+                    <ul ref={navItemsRef} className='nav-items capitalize'>
+                        <li className='nav-item'>
+                            <Link className='nav-link'>course</Link>
+                        </li>
+                        <li className='nav-item'>
+                            <Link className='nav-link'>career</Link>
+                        </li>
+                        <li className='nav-item'>
+                            <Link className='nav-link'>about us</Link>
+                        </li>
+                        <li className='nav-item'>
+                            <Link to={'/login'} className='nav-link login-link'>sign in</Link>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </Wrapper>
+    )
+}
+
+const Wrapper = styled.header`
+.header-content {
+    padding-top: 1rem;
+    width: 90%;
+    margin: auto;
+    max-width: 1200px
+}
+.lh {
+    display: flex;
+    justify-content: space-between;
+}
+.logo {
+    width: 3rem;
+}
+.menu {
+    align-self: flex-start;
+}
+.nav {
+    height: 0;
+    overflow: hidden;
+}
+.nav-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: var(--bg-blue);
+    padding: 1rem;
+}
+.nav-link {
+    display: inline-block;
+    color: #ffffff;
+}
+@media (min-width: 576px) {
+    
+}
+@media (min-width: 768px) {
+    .header-content {
+        padding-top: 1rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+    .logo {
+        width: 4.0rem;
+    }
+    .menu {
+        display: none;
+    }
+    .nav {
+        height: auto !important;
+    }
+    .nav-items {
+        align-items: center;
+        flex-direction: row;
+        gap: 1rem;
+        background-color: transparent;
+        padding: 0;
+    }
+    .nav-link {
+        color: #000000;
+        font-weight: bold;
+    }
+    .login-link {
+        background-color: var(--bg-blue);
+        border-radius: 16px;
+        color: white;
+        padding: .5rem 1rem;
+        text-align: center;
+        width: 100px;
+        font-weight: 400;
+    }
+}
+@media (min-width: 992px) {
+    .header-content {
+        padding-top: 2rem;
+    }
+    .nav-items {
+        gap: 3rem;
+    }
+    .menu {
+        display: none;
+    }
+    .nav-link {
+        font-size: 1.2rem;
+    }
+    .login-link {
+        padding: .7rem 2rem;
+        width: 150px;
+    }
+}
+`
+
+export default Header

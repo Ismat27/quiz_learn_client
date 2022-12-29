@@ -1,22 +1,9 @@
-import { NavLink } from "react-router-dom"
-import { useGlobalContext } from "../../app/AppContext"
-
+import Header from "../../components/Header"
 const HomePage = () => {
-    const {login} = useGlobalContext()
 
     return (
         <>
-            <h1>
-                Welcome
-            </h1>
-            <nav>
-                {
-                login?
-                <NavLink to={'/dashboard'}>dasboard</NavLink>:
-                <NavLink to={'/login'}>login</NavLink>
-                }
-            </nav>
-            
+            <Header />
         </>
     )
 }
