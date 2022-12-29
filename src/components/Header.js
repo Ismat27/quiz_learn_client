@@ -137,7 +137,7 @@ const Wrapper = styled.header`
         color: white;
         padding: .5rem 1rem;
         text-align: center;
-        width: 100px;
+        min-width: 100px;
         font-weight: 400;
     }
 }
@@ -150,7 +150,7 @@ const Wrapper = styled.header`
     }
     .login-link {
         padding: .7rem 2rem;
-        width: 150px;
+        min-width: 150px;
     }
 }
 `
