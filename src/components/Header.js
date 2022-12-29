@@ -71,6 +71,7 @@ const Wrapper = styled.header`
 .nav {
     height: 0;
     overflow: hidden;
+    margin-top: 1rem;
 }
 .nav-items {
     display: flex;
@@ -100,12 +101,13 @@ const Wrapper = styled.header`
         display: none;
     }
     .nav {
+        margin: 0;
         height: auto !important;
     }
     .nav-items {
         align-items: center;
         flex-direction: row;
-        gap: 1rem;
+        gap: 3rem;
         background-color: transparent;
         padding: 0;
     }
@@ -126,12 +128,6 @@ const Wrapper = styled.header`
 @media (min-width: 992px) {
     .header-content {
         padding-top: 2rem;
-    }
-    .nav-items {
-        gap: 3rem;
-    }
-    .menu {
-        display: none;
     }
     .nav-link {
         font-size: 1.2rem;
