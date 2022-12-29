@@ -8,7 +8,7 @@ import { useGlobalContext } from '../app/AppContext'
 
 const Header = () => {
 
-    const { login } = useGlobalContext()
+    const { login, logoutFunction } = useGlobalContext()
     const [navOpen, setNavOpen] = useState(false)
     const navContainerRef = useRef(null)
     const navItemsRef = useRef(null)
@@ -46,9 +46,16 @@ const Header = () => {
                         </li>
                         {
                             login ?
-                            <li className='nav-item'>
-                                <Link to={'/dashboard'} className='nav-link login-link'>dashboard</Link>
-                            </li> :
+                            <>
+                                <li className='nav-item'>
+                                    <Link to={'/dashboard'} className='nav-link login-link'>dashboard</Link>
+                                </li> 
+                                <li className='nav-item'>
+                                    <Link onClick={logoutFunction} to={'/'} className='nav-link login-link'>sign out</Link>
+                                </li> 
+
+                            </>
+                            :
                             <li className='nav-item'>
                                 <Link to={'/login'} className='nav-link login-link'>sign in</Link>
                             </li>
