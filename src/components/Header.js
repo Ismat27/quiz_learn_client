@@ -23,6 +23,10 @@ const Header = () => {
         }
     }, [navOpen])
 
+    const closeNav = () => {
+        setNavOpen(false)
+    }
+
     return (
         <Wrapper>
             <div className='header-content'>
@@ -36,28 +40,33 @@ const Header = () => {
                 <nav ref={navContainerRef} className='nav'>
                     <ul ref={navItemsRef} className='nav-items capitalize'>
                         <li className='nav-item'>
-                            <Link className='nav-link'>course</Link>
+                            <Link onClick={closeNav} className='nav-link'>course</Link>
                         </li>
                         <li className='nav-item'>
-                            <Link className='nav-link'>career</Link>
+                            <Link onClick={closeNav} className='nav-link'>career</Link>
                         </li>
                         <li className='nav-item'>
-                            <Link className='nav-link'>about us</Link>
+                            <Link onClick={closeNav} className='nav-link'>about us</Link>
                         </li>
                         {
                             login ?
                             <>
                                 <li className='nav-item'>
-                                    <Link to={'/dashboard'} className='nav-link login-link'>dashboard</Link>
+                                    <Link onClick={closeNav} to={'/dashboard'} className='nav-link login-link'>dashboard</Link>
                                 </li> 
                                 <li className='nav-item'>
-                                    <Link onClick={logoutFunction} to={'/'} className='nav-link login-link'>sign out</Link>
+                                    <Link onClick={
+                                        () => {
+                                            logoutFunction()
+                                            closeNav()
+                                        }
+                                    } to={'/'} className='nav-link login-link'>sign out</Link>
                                 </li> 
 
                             </>
                             :
                             <li className='nav-item'>
-                                <Link to={'/login'} className='nav-link login-link'>sign in</Link>
+                                <Link onClick={closeNav} to={'/login'} className='nav-link login-link'>sign in</Link>
                             </li>
                         }
                     </ul>
