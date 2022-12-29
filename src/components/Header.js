@@ -4,8 +4,11 @@ import Logo from './Logo'
 import Hamburger from './Hamburger'
 import { Link } from 'react-router-dom'
 
+import { useGlobalContext } from '../app/AppContext'
+
 const Header = () => {
 
+    const { login } = useGlobalContext()
     const [navOpen, setNavOpen] = useState(false)
     const navContainerRef = useRef(null)
     const navItemsRef = useRef(null)
@@ -41,9 +44,15 @@ const Header = () => {
                         <li className='nav-item'>
                             <Link className='nav-link'>about us</Link>
                         </li>
-                        <li className='nav-item'>
-                            <Link to={'/login'} className='nav-link login-link'>sign in</Link>
-                        </li>
+                        {
+                            login ?
+                            <li className='nav-item'>
+                                <Link to={'/dashboard'} className='nav-link login-link'>dashboard</Link>
+                            </li> :
+                            <li className='nav-item'>
+                                <Link to={'/login'} className='nav-link login-link'>sign in</Link>
+                            </li>
+                        }
                     </ul>
                 </nav>
             </div>
