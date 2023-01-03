@@ -182,7 +182,7 @@ aside.open {
   margin-top: 10px;
 }
 .header img {
-    width: 50px;
+  width: 50px;
 }
 
 .dashboard-layout {
@@ -204,6 +204,17 @@ aside.open {
 .no-quiz .action-btn {
   width: 200px;
   font-size: 18px;
+}
+
+.h-box {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.h-box h2 {
+  border: 2px solid #000000;
+  padding-block: 0.2rem;
+  display: inline-block;
+  padding: 0.5rem;
 }
 
 @media (min-width: 576px) {
