@@ -28,8 +28,12 @@ ul, li {
 a {
   text-decoration: none;
 }
+img {
+  max-width: 100%;
+}
 .home-page {
-  max-width: 1200px;
+  max-width: 1000px;
+  margin: auto;
 }
 .btn {
   cursor: pointer;

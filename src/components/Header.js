@@ -29,7 +29,7 @@ const Header = () => {
 
     return (
         <Wrapper>
-            <div className='header-content'>
+            <div className='header-content home-page'>
                 <div className='lh'>
                     <Logo />
                     <Hamburger 
@@ -80,8 +80,6 @@ const Wrapper = styled.header`
 .header-content {
     padding-top: 1rem;
     width: 90%;
-    margin: auto;
-    max-width: 1200px
 }
 .lh {
     display: flex;
