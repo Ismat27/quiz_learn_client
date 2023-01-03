@@ -28,6 +28,9 @@ ul, li {
 a {
   text-decoration: none;
 }
+.home-page {
+  max-width: 1200px;
+}
 .btn {
   cursor: pointer;
 }
