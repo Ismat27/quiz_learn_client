@@ -39,16 +39,6 @@ const HowItWorks = () => {
 }
 
 const Wrapper = styled.section`
-.h-box {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-h2 {
-    border: 2px solid #000000;
-    padding-block: 0.2rem;
-    display: inline-block;
-    padding: 0.5rem;
-}
 .content {
     width: 90%;
     margin: auto;
