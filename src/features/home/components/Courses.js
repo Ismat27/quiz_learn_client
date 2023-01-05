@@ -70,6 +70,7 @@ max-width: 800px;
     padding: 1rem;
     border-radius: 5px;
     color: #ffffff;
+    font-weight: 600;
 }
 .c-top, .course-name {
     display: flex;
