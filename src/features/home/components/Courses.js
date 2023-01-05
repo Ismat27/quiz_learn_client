@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { coursesInfo } from '../data/coursesInfo'
-const Card = ({question, answer}) => {
+const Card = ({question, answer, number}) => {
 
     const [isOpen, setIsOpen] = useState(false)
     const containerRef = useRef()
@@ -40,6 +40,13 @@ const Courses = () => {
                 <h2>available courses</h2>
             </div>
             <div className='courses-box'>
+            {
+                coursesInfo.map((item, index) => {
+                    return (
+                        <Card key={item.id} number={item.id} {...item} />
+                    )
+                })
+            }
                 <Card 
                     question={'what is ui/ux'}
                     answer={'answer to the question asked'}
