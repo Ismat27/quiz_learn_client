@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-
+import { coursesInfo } from '../data/coursesInfo'
 const Card = ({question, answer}) => {
 
     const [isOpen, setIsOpen] = useState(false)

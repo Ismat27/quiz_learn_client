@@ -1,0 +1,7 @@
+const coursesInfo = [
+    {
+
+    }
+]
+
+export {coursesInfo}
