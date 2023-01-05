@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { coursesInfo } from '../data/coursesInfo'
-const Card = ({question, answer, number}) => {
+const Card = ({course_title, course_desc, number}) => {
 
     const [isOpen, setIsOpen] = useState(false)
     const containerRef = useRef()
@@ -20,13 +20,16 @@ const Card = ({question, answer, number}) => {
     return (
         <article className='capitalize course-info'>
             <div className='c-top'>
-                <h3 className='course-name'>{question}</h3>
+                <h3 className='bold course-name'>
+                    <span>{number}.</span>
+                    <span>{course_title}</span>
+                </h3>
                 <button className='toggler' onClick={() => setIsOpen(!isOpen)}>
                     {isOpen? '-': '+'}
                 </button>
             </div>
             <div ref={containerRef} className='answer-box'>
-                <p ref={answerRef} className='course-desc'>{answer}</p>
+                <p ref={answerRef} className='course-desc'>{course_desc}</p>
             </div>
         </article>
     )
@@ -43,22 +46,10 @@ const Courses = () => {
             {
                 coursesInfo.map((item, index) => {
                     return (
-                        <Card key={item.id} number={item.id} {...item} />
+                        <Card key={item.id} number={index + 1} {...item} />
                     )
                 })
             }
-                <Card 
-                    question={'what is ui/ux'}
-                    answer={'answer to the question asked'}
-                />
-                <Card 
-                    question={'what is frontend development'}
-                    answer={'answer to the question asked'}
-                />
-                <Card 
-                    question={'what is backend development'}
-                    answer={'answer to the question asked'}
-                />
             </div>
         </div>
     </Wrapper>
@@ -66,7 +57,7 @@ const Courses = () => {
 }
 
 const Wrapper = styled.section`
-padding-top: 2rem;
+padding-top: 3.5rem;
 width: 90%;
 margin: auto;
 max-width: 800px;
@@ -80,16 +71,24 @@ max-width: 800px;
     border-radius: 5px;
     color: #ffffff;
 }
-.c-top {
+.c-top, .course-name {
     display: flex;
-    justify-content: space-between;
     align-items: flex-start;
     gap: .5rem;
+}
+.c-top {
+    justify-content: space-between;
+}
+.course-name {
+    font-weight: 600;
 }
 .answer-box {
     height: 0;
     overflow: hidden;
-    transition: all 200ms;
+    color: rgba(255, 255, 255, 0.46);
+    p {
+        padding-top: 1rem;
+    }
 }
 .toggler {
     background-color: white;

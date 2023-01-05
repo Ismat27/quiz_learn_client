@@ -1,58 +1,58 @@
 const coursesInfo = [
     {
         id: 1,
-        question: '',
-        answer: ''
+        course_title: 'UI/UX Design',
+        course_desc: ' you’ll be taught by our experience and qualified teachers, and get update through our website, telegram page and newsletters.'
     },
     {
         id: 2,
-        question: '',
-        answer: ''
+        course_title: 'backend web development',
+        course_desc: ''
     },
     {
         id: 3,
-        question: '',
-        answer: ''
+        course_title: 'front-end web development',
+        course_desc: ''
     },
     {
         id: 4,
-        question: '',
-        answer: ''
+        course_title: 'product management',
+        course_desc: ''
     },
     {
         id: 5,
-        question: '',
-        answer: ''
+        course_title: 'advance cryptocurrency',
+        course_desc: ''
     },
     {
         id: 6,
-        question: '',
-        answer: ''
+        course_title: 'quantum mechanics',
+        course_desc: ''
     },
     {
         id: 7,
-        question: '',
-        answer: ''
+        course_title: 'graphics design',
+        course_desc: ''
     },
     {
         id: 8,
-        question: '',
-        answer: ''
+        course_title: 'african health and herb methodology',
+        course_desc: ''
     },
     {
         id: 9,
-        question: '',
-        answer: ''
+        course_title: 'true africa history',
+        course_desc: ''
     },
     {
         id: 10,
-        question: '',
-        answer: ''
+        course_title: 'skin care production',
+        course_desc: ''
     },
     {
         id: 11,
-        question: '',
-        answer: ''
+        course_title: 'deFi & nFTs',
+        course_desc: ''
     },
 ]
 
