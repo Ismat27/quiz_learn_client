@@ -106,6 +106,7 @@ button {
     flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 2rem;
+    gap: 1.5rem;
     h3 {
         margin-bottom: 1rem;
         font-weight: 600;
