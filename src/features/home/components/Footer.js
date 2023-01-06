@@ -46,6 +46,9 @@ const Footer = () => {
                 </div>
             </div>
         </div>
+        <p className='capitalize last-p'>
+            &#169; {new Date().getFullYear()} copyright by smartquiz. All rights reserved
+        </p>
     </Wrapper>
   )
 }
@@ -102,8 +105,10 @@ button {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    margin-bottom: 2rem;
     h3 {
         margin-bottom: 1rem;
+        font-weight: 600;
     }
     ul {
         display: flex;
@@ -114,6 +119,11 @@ button {
         color: rgba(255, 255, 255, 0.66);
         font-weight: 600;
     }
+}
+.last-p {
+    color: rgba(255, 255, 255, 0.66);
+    font-weight: 600;
+    text-align: center;
 }
 @media (min-width: 576px) {
     .top {
