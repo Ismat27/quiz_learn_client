@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Footer = () => {
@@ -15,8 +16,34 @@ const Footer = () => {
                     <button>join now</button>
                 </div>
             </div>
-            <div>
-                <div></div>
+            <div className='links'>
+                <div className='capitalize'>
+                    <h3>products</h3>
+                    <ul>
+                        <li><Link>course</Link></li>
+                        <li><Link>quiz</Link></li>
+                        <li><Link>refer program</Link></li>
+                        <li><Link>spin rewards</Link></li>
+                    </ul>
+                </div>
+                <div className='capitalize'>
+                    <h3>about</h3>
+                    <ul>
+                        <li><Link>what we do</Link></li>
+                        <li><Link>our mission</Link></li>
+                        <li><Link>contact us</Link></li>
+                        <li><Link>FAQ</Link></li>
+                        <li><Link>privacy  & policy</Link></li>
+                    </ul>
+                </div>
+                <div className='capitalize'>
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><Link>Docs</Link></li>
+                        <li><Link>careers</Link></li>
+                        <li><Link>blog</Link></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </Wrapper>
@@ -70,6 +97,23 @@ button {
     border-radius: 0px 10px 10px 0px;
     text-transform: uppercase;
     cursor: pointer;
+}
+.links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    h3 {
+        margin-bottom: 1rem;
+    }
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
+    a {
+        color: rgba(255, 255, 255, 0.66);
+        font-weight: 600;
+    }
 }
 @media (min-width: 576px) {
     .top {
