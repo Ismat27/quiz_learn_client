@@ -14,7 +14,7 @@ const Features = () => {
             <div className='capitalize cards'>
                 <article className='card'>
                     <div className='card-img'>
-                        <img src={atm}/>        
+                        <img src={atm} alt='fast withdrawal'/>        
                     </div>
                     <div className='card-text'>
                         <h3>fast withdrawals</h3>
@@ -23,7 +23,7 @@ const Features = () => {
                 </article>
                 <article className='card'>
                     <div className='card-img'>
-                        <img src={spin}/>        
+                        <img src={spin} alt='spin wheel'/>        
                     </div>
                     <div className='card-text'>
                         <h3>spin and win</h3>
@@ -32,7 +32,7 @@ const Features = () => {
                 </article>
                 <article className='card'>
                     <div className='card-img'>
-                        <img src={cancel}/>        
+                        <img src={cancel} alt='referral not compulsory'/>        
                     </div>
                     <div className='card-text'>
                         <h3>referrals</h3>
