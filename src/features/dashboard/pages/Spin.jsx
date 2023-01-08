@@ -23,6 +23,10 @@ const Spin = () => {
   return (
     <Wrapper>
       <div className="container">
+        <article className="capitalize">
+          <h1>spin and win</h1>
+          <p className="bold p-grey">you can only spin once. check out our <br/> others reward page for more opportunities.</p>
+        </article>
         <div className="outer-circle">
           <ul className="circle" ref={circleRef}>
             {
@@ -41,21 +45,25 @@ const Spin = () => {
           <button disabled={spinned} onClick={spin} className="spinner">spin</button>
         </div>
       </div>
-    </Wrapper>
+  </Wrapper>
   )
 }
 
 const Wrapper = styled.section`
+padding-top: 2.5rem;
 .container {
   display: grid;
   place-items: center;
-  height: 100vh;
+}
+article {
+  margin-bottom: 2rem;
+  text-align: center;
 }
 .outer-circle {
   position: relative;
   background-color: black;
-  width: 22em;
-  height: 22em;
+  width: 20rem;
+  height: 20rem;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -65,12 +73,11 @@ const Wrapper = styled.section`
   height: 0; 
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
-  
   border-top: 40px solid #ffffff;
   position: absolute;
   top: 0;
   left: 55%;
-  transform: skewY(20deg);
+  transform: translateX(20px);
 }
 
 button {
@@ -78,7 +85,6 @@ button {
   padding: .5rem 1rem;
   background-color: white;
   border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
   font-size: 1rem;
   cursor: pointer;
   position: absolute;
@@ -89,8 +95,8 @@ button {
   position: relative;
   padding: 0;
   margin: 1em auto;
-  width: 20em;
-  height: 20em;
+  width: 18rem;
+  height: 18rem;
   border-radius: 50%;
   list-style: none;
   overflow: hidden;
@@ -164,6 +170,42 @@ li:nth-child(7) .text {
 }
 li:nth-child(8) .text {
   background: #2E3192;
+}
+@media (min-width: 576px) {
+  .outer-circle {
+    width: 400px;
+    height: 400px;
+  }
+  .circle {
+    width: 350px;
+    height: 350px;
+  }
+}
+@media (min-width: 768px) {
+  .outer-circle {
+    width: 450px;
+    height: 450px;
+  }
+  .circle {
+    width: 400px;
+    height: 400px;
+  }
+}
+@media (min-width: 992px) {
+  h1 {
+    font-size: 2rem;
+  }
+  p {
+    font-size: 1.25rem;
+  }
+  .outer-circle {
+    width: 500px;
+    height: 500px;
+  }
+  .circle {
+    width: 450px;
+    height: 450px;
+  }
 }
 `
 export default Spin

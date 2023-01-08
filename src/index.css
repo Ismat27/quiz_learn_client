@@ -3,6 +3,7 @@
   --ash-color: rgba(0, 0, 0, 0.64);
   --border-radius: .5rem;
   --white-color: #ffffff;
+  --p-grey: rgba(0, 0, 0, 0.47);
 }
 
 * {
@@ -34,6 +35,12 @@ img {
 .home-page {
   max-width: 1000px;
   margin: auto;
+}
+.p-grey {
+  color: var(--p-grey);
+}
+.bold {
+  font-weight: 600;
 }
 .btn {
   cursor: pointer;
