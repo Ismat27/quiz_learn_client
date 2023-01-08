@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { useRef, useState } from "react";
+import ModalBox from "../../../components/ModalBox";
 
 const points = [
   5, 50, null, null, 100, null,
@@ -12,18 +13,41 @@ const Spin = () => {
 
   const circleRef = useRef(null);
   const [spinned, setSpinned] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+  const [point, setPoint] = useState(0)
 
   const spin = () => {
     let number = Math.random() * points.length
     number = Math.floor(number)
     const degree =  360 - (degreeInterval * number)
-    console.log(degree, points[number]);
+    const mark = points[number]
     circleRef.current.style.transform = `rotate(${degree + 1080}deg)`
+
     setSpinned(true)
+    const timeout = setTimeout(() => {
+      setShowModal(true)
+      setPoint(mark ? mark : 0)
+    }, 2000)
+
+    return () => clearTimeout(timeout)
+  }
+
+  const closeModal = () => {
+    setShowModal(false)
   }
 
   return (
     <Wrapper>
+    {
+      showModal && 
+      <ModalBox>
+        <article className="capitalize modal-content">
+          <h1>congratulations</h1>
+          <p className="bold p-grey">you have won {point} points</p>
+          <button onClick={closeModal} className="action-btn2">continue</button>
+        </article>
+      </ModalBox>
+    }
       <div className="container">
         <article className="capitalize">
           <h1>spin and win</h1>
@@ -84,7 +108,7 @@ article {
   transform: translateX(20px);
 }
 
-button {
+.spinner {
   border: none;
   padding: .5rem 1rem;
   background-color: white;
