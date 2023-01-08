@@ -5,6 +5,8 @@ const points = [
   5, 50, null, null, 100, null,
   null, 25, 
 ]
+const degreeInterval = 360 / points.length
+const skewAngle = points.length * 5
 
 const Spin = () => {
 
@@ -14,7 +16,7 @@ const Spin = () => {
   const spin = () => {
     let number = Math.random() * points.length
     number = Math.floor(number)
-    const degree =  360 - (45 * number)
+    const degree =  360 - (degreeInterval * number)
     console.log(degree, points[number]);
     circleRef.current.style.transform = `rotate(${degree + 1080}deg)`
     setSpinned(true)
@@ -31,9 +33,11 @@ const Spin = () => {
           <ul className="circle" ref={circleRef}>
             {
               points.map((point, index) => {
+                const style = {transform: `rotate(${index * degreeInterval}deg) skewY(-${skewAngle}deg)`}
+                const textStyle = {transform: `skewY(${skewAngle}deg) rotate(15deg)`}
                 return (
-                  <li key={index}>
-                    <div className="bold capitalize text">
+                  <li key={index} style={style}>
+                    <div style={textStyle} className="bold capitalize text">
                       {point? point : 'empty'}
                     </div>
                   </li>
@@ -117,35 +121,10 @@ li {
   width: 200%;
   height: 200%;
   text-align: center;
-  transform: skewY(40deg) rotate(15deg);
   padding-top: 20px;
   padding-left: 20px;
   color: white;
 
-}
-li:first-child {
-  transform: rotate(0deg) skewY(-40deg);
-}
-li:nth-child(2) {
-  transform: rotate(45deg) skewY(-40deg);
-}
-li:nth-child(3) {
-  transform: rotate(90deg) skewY(-40deg);
-}
-li:nth-child(4) {
-  transform: rotate(135deg) skewY(-40deg);
-}
-li:nth-child(5) {
-  transform: rotate(180deg) skewY(-40deg);
-}
-li:nth-child(6) {
-  transform: rotate(225deg) skewY(-40deg);
-}
-li:nth-child(7) {
-  transform: rotate(270deg) skewY(-40deg);
-}
-li:nth-child(8) {
-  transform: rotate(315deg) skewY(-40deg);
 }
 li:first-child .text {
   background: #F7941D;
