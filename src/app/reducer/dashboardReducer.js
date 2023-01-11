@@ -1,11 +1,19 @@
 const reducer = (state, action) => {
     switch (action.type) {
-        case 'LOAD_DATA':
-            console.log('loading data');
+        case 'LOAD_DATA_SUCCESS':
+            const data = action.payload;
             return {
-                ...state
+                ...state,
+                ...data,
+                loading: false,
+                error: false,
             }
-        
+        case 'LOAD_DATA_ERROR':
+            return {
+                ...state,
+                loading: false,
+                error: true
+            }
         default:
             break;
     }
