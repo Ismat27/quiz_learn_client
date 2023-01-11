@@ -1,32 +1,20 @@
-import { useState, useEffect, useContext, useCallback } from "react"
-import axios from "axios"
-import { Context } from "../../../app/AppContext"
 import styled from "styled-components"
-import CircularLoader from "../../../components/CircularLoader"
-
-const BASE_URL = process.env.REACT_APP_BASE_API_URL
+import { useDashboardContext } from "../../../context/DashboardContext"
 
 const LeaderBoard = () => {
-  const [leaderboardData, setLeaderboardData] = useState([])
-  const { token } = useContext(Context)
+  const {
+    loading,
+    error,
+    leaderboard
+  } = useDashboardContext()
 
-  const getData = useCallback(async () => {
-    try {
-      const response = await axios(`${BASE_URL}/leaderboard/`, {
-        headers: {
-          Authorization: `Token ${token}`
-        }
-      })
-      setLeaderboardData(response.data)
-    } catch (error) {
-      console.log(error.response.data);
-    }
+  if (error) {
+    return <h1>an error occured, pls reload or logout and login again</h1>
+  }
 
-  }, [token]) 
-  
-  useEffect(() => {
-    getData()
-  }, [getData])
+  if (loading) {
+    return <h1>loading...</h1>
+  }  
 
   return (
     <Wrapper>
@@ -35,7 +23,7 @@ const LeaderBoard = () => {
         <p className="section-intro">view the leaderboard history</p>
       </div>
       {
-        leaderboardData.length > 0 ?
+        leaderboard.length > 0 ?
       <div role={'table'} className="leaderboard">
         <div className="board-item">
           <p>&nbsp;</p>
@@ -44,7 +32,7 @@ const LeaderBoard = () => {
           <p>reward</p>
         </div>
         {
-          leaderboardData.map((item, index) => {
+          leaderboard.map((item, index) => {
             return (
               <div role={'row'} className="board-item" key={index}>
                 <p>{index + 1}</p>
@@ -57,7 +45,7 @@ const LeaderBoard = () => {
         }
       </div> :
       <div className="loader">
-        <CircularLoader />
+        <h1>no one in leaderboard, take quiz to be first person</h1>
       </div>
       }
     </Wrapper>
