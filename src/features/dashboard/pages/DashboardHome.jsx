@@ -1,47 +1,29 @@
-import { useEffect, useState } from "react"
-import axios from "axios"
 import { useGlobalContext } from "../../../app/AppContext"
 import UserAssets from "../components/UserAssets"
 import EarningsHistory from "../components/EarningsHistory"
 import styled from "styled-components"
-
-const BASE_URL = process.env.REACT_APP_BASE_API_URL
+import { useDashboardContext } from "../../../context/DashboardContext"
 
 const DashboardHome = () => {
-    const [referrals, setReferrals] = useState([])
-    const [quizSessions, setQuizSessions] = useState([])
-    const [totalPoints, setTotalPoints] = useState(0)
-    const [totalReferrals, setTotalReferrals] = useState(0)
-
-    const {token, setLogin, userDetails} =  useGlobalContext()
-    useEffect(() => {
-        axios.get(`${BASE_URL}/dashboard/`, {
-            headers: {
-                'Authorization': `Token ${token}`,
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => {
-            const {data} = response
-            // console.log(data);
-            const { referrals, total_referrals, total_points, quiz_sessions } = data
-            setReferrals(referrals)
-            setTotalReferrals(total_referrals)
-            setTotalPoints(total_points)
-            setQuizSessions(quiz_sessions)
-            setLogin(true)
-        })
-        .catch(error => {
-            console.log(error);
-            setLogin(false)
-        })
     
-        }, [token, setLogin, setReferrals])
+    const {
+        loading,
+        error,
+        quiz_sessions, 
+        referrals, 
+        total_referrals,
+        total_points
+    } = useDashboardContext()
 
+    const {userDetails} =  useGlobalContext()
 
-    // if (referrals.length <=0) {
-    //     return <h1>no items</h1>
-    // }
+    if (error) {
+        return <h1>an error occured, pls reload or logout and login again</h1>
+    }
+    
+    if (loading) {
+        return <h1>loading...</h1>
+    }    
 
     return (
         <Wrapper className="dashboard-home">
@@ -50,11 +32,11 @@ const DashboardHome = () => {
                 <strong>welcome, {userDetails.username}</strong>
             </p>
             <UserAssets 
-                total_points={totalPoints}
-                total_referrals={totalReferrals}
+                total_points={total_points}
+                total_referrals={total_referrals}
             />
             <EarningsHistory 
-                data={quizSessions}
+                data={quiz_sessions}
             />
             {referrals.map((user) => {
                 return <h4 key={user.referred_user}>{user.referred_user}</h4>
