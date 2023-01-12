@@ -4,10 +4,15 @@ import styled from 'styled-components'
 import { useGlobalContext } from '../../../app/AppContext'
 import { useNavigate } from 'react-router-dom'
 import CircularLoader from '../../../components/CircularLoader'
+import { useDashboardContext } from '../../../context/DashboardContext'
 
 const BASE_URL = process.env.REACT_APP_BASE_API_URL
 
 const QuizBoard = ({ endQuizMode }) => {
+
+    const { 
+        loadDashboardData, 
+    } = useDashboardContext()
 
     const { token } = useGlobalContext()
     const [error, setError] = useState(false)
@@ -72,6 +77,7 @@ const QuizBoard = ({ endQuizMode }) => {
             setSubmitting(false)
             console.log(error);
         })
+        loadDashboardData()
       }
 
     useEffect(() => {
