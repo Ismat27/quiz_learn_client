@@ -7,23 +7,13 @@ import { useDashboardContext } from "../../../context/DashboardContext"
 const DashboardHome = () => {
     
     const {
-        loading,
-        error,
         quiz_sessions, 
         referrals, 
         total_referrals,
         total_points
     } = useDashboardContext()
 
-    const {userDetails} =  useGlobalContext()
-
-    if (error) {
-        return <h1>an error occured, pls reload or logout and login again</h1>
-    }
-    
-    if (loading) {
-        return <h1>loading...</h1>
-    }    
+    const {userDetails} =  useGlobalContext()  
 
     return (
         <Wrapper className="dashboard-home">
