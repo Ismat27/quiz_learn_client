@@ -1,5 +1,5 @@
 import axios from "axios"
-import { createContext, useContext, useEffect, useReducer } from "react"
+import { createContext, useCallback, useContext, useEffect, useReducer } from "react"
 import { useGlobalContext } from "../app/AppContext"
 import reducer from "../app/reducer/dashboardReducer"
 
@@ -23,7 +23,11 @@ const DashboardContext = ({children}) => {
     const {token} = useGlobalContext();
     const [state, dispatch] = useReducer(reducer, initialData)
 
-    const loadData = () => {
+    const loadDashboardData = useCallback(() => {
+        if (!token) {
+            return
+        }
+        dispatch({type: 'LOAD_DATA_BEGIN'})
         axios.get(`${BASE_URL}/dashboard/`, {
             headers: {
                 'Authorization': `Token ${token}`,
@@ -37,16 +41,17 @@ const DashboardContext = ({children}) => {
         .catch(() => {
             dispatch({type: 'LOAD_DATA_ERROR'})
         })
-    }
+    }, [token])
 
     useEffect(() => {
-        loadData()
-    }, [])
+        loadDashboardData()
+    }, [loadDashboardData])
 
   return (
     <Context.Provider 
         value={{
-            ...state
+            ...state,
+            loadDashboardData
         }}
     >
         {children}
